@@ -26,4 +26,4 @@ function gpull {
 export PATH=$PATH:/opt/local/bin
 export P4EDITOR=/usr/bin/vi
 export PS1="[\\u@\h \\W] (\$(parse_git_branch))\$ "
-
+alias ls='ls --color'
