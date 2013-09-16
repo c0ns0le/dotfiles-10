@@ -7,6 +7,8 @@ https://github.com/xaque208/dotfiles
 
 Installation
 =============
+```terminal
 git clone git://github.com/atayarani/dotfiles ~/.dotfiles
 cd ~/.dotfiles
 rake install
+```
