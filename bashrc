@@ -23,7 +23,27 @@ function gpull {
     /usr/bin/git pull origin $branch
 }
 
+function p {
+    cd ~/code/perforce/$1
+}
+
+function g {
+    cd ~/code/git/$1
+}
+
 export PATH=$PATH:/opt/local/bin
 export P4EDITOR=/usr/bin/vi
 export PS1="[\\u@\h \\W] (\$(parse_git_branch))\$ "
-alias ls='ls --color'
+
+#Aliases
+if [ $(uname) == 'Darwin' ]; then
+    alias ls='ls -G'
+    alias ll='ls -lG'
+    alias lla='ls -laG'
+else
+    alias ls='ls --color'
+    alias ll='ls -l --color'
+    alias lla='ls -la --color'
+fi
+    
+alias grep='grep --color'
