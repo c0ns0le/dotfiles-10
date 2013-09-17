@@ -31,6 +31,11 @@ function g {
     cd ~/code/git/$1
 }
 
+function git_conflicts {
+    g $1
+    grep -ir '< HEAD' *
+    cd -
+}
 export PATH=$PATH:/opt/local/bin
 export P4EDITOR=/usr/bin/vi
 export PS1="[\\u@\h \\W] (\$(parse_git_branch))\$ "
@@ -47,3 +52,5 @@ else
 fi
     
 alias grep='grep --color'
+alias ln='ln -sin'
+alias gco='git checkout'
