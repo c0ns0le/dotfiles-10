@@ -1,0 +1,4 @@
+[[ -s ~/.bashrc ]] && source ~/.bashrc
+source_home
+source_dotfiles ~/.vcs
+
