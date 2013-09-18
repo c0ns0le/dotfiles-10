@@ -1,7 +1,9 @@
 require 'rake'
 require 'erb'
 
-task :default => [:install]
+task :default do
+  Rake::Task['install'].invoke
+end
 
 desc "install the dot files into user's home directory"
 task :install do
