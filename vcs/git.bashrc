@@ -24,8 +24,8 @@ function g {
 
 function git_conflicts {
       g $1
-          grep -ir '< HEAD' *
-              cd -
+      grep -ir '< HEAD' *
+      cd -
 }
 
 function git_review {

@@ -1,3 +1,9 @@
+#For PS1
+function parse_git_branch {
+    branch=$(git branch 2> /dev/null | awk '$1 ~ /\*/ {print $NF}' 2> /dev/null) || return
+          echo $branch
+}
+
 function source_dotfiles {
     for script in $1/*; do
 
@@ -6,13 +12,13 @@ function source_dotfiles {
         [ -f "$script" ] || continue
 
         # execute $script in the context of the current shell
+        echo "Sourcing $script"
         . $script
     done
 }
 
 export PATH=$PATH:/opt/local/bin
 
-#PS1 is dependent on git.bashrc
 export PS1="[\\u@\h \\W] (\$(parse_git_branch))\$ "
 
 #Aliases
@@ -29,5 +35,6 @@ fi
 alias grep='grep --color'
 alias ln='ln -sin'
 alias gco='git checkout'
-
+alias source_home='source_dotfiles ~'
+source_home
 

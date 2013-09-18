@@ -2,4 +2,12 @@ function p {
   cd ~/code/perforce/$1
 }
 
-export P4EDITOR=/usr/bin/vi
+function pendlists {
+  for list in "$(p4 changes | grep pending | grep atayarani)";do
+    echo "$list"
+  done
+}
+export P4EDITOR=/bin/vi
+
+#Aliases
+
