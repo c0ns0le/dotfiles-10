@@ -1,0 +1,4 @@
+{
+  // Full path to the lint.py module in the pylint package
+    "pylint_path": "/usr/local/bin/pylint"
+}

@@ -1,0 +1,12 @@
+{
+	"installed_packages":
+	[
+		"Anaconda",
+		"AutoPEP8",
+		"Git",
+		"Highlight Whitespaces",
+		"Perforce",
+		"Puppet",
+		"Run"
+	]
+}
