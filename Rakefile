@@ -133,6 +133,6 @@ def link_file(file)
     end
   else
     puts "linking ~/.#{file}"
-    symlink "#{Dir.pwd}/#{file}", "$HOME/.#{file}"
+    symlink "#{Dir.pwd}/#{file}", "#{ENV['HOME']}.#{file}"
   end
 end
