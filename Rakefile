@@ -17,7 +17,7 @@ task :default do
 end
 
 desc "install vimrc into user's home directory"
-task :install_vim do
+task :install_vimrc do
   files = ['vimrc']
   files.each do |file|
     install_file src_file = file, dest_path = ENV['HOME']
@@ -45,6 +45,18 @@ task :install_perforcerc do
   files = ['vcs/perforce.bashrc']
   files.each do |file|
     install_file src_file = file, dest_path = "#{ENV['HOME']}/.vcs"
+  end
+end
+
+desc "install sublime (3) packages"
+task :install_sublime_pkgs do
+  host_os = RUBY_PLATFORM
+  file = "%s/Sublime/User" % Dir.pwd
+  case host_os
+  when /darwin|mac os/
+    link_dir src_path = file, dest_path = "#{ENV['HOME']}/Library/Application\ Support/Sublime\ Text\ 3/Packages/User"
+  else
+    puts 'OS Not Configured'
   end
 end
 
@@ -96,6 +108,10 @@ def install_file src_file, dest_path
   end
 end
 
+def link_dir(src_path, dest_path)
+  symlink src_path, dest_path
+end
+
 def write_login items
   File.open('bash_login', 'w') do |f|
     items.each do |item|
@@ -105,7 +121,7 @@ def write_login items
 end
 
 def replace_file(file)
-  system %Q{rm -rf "$HOME/.#{file.sub(/\.erb$/, '')}"}
+  FileUtils.rmtree "$HOME/.#{file.sub(/\.erb$/, '')}"
   link_file(file)
 end
 
@@ -117,6 +133,6 @@ def link_file(file)
     end
   else
     puts "linking ~/.#{file}"
-    system %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
+    symlink "$PWD/#{file}", "$HOME/.#{file}"
   end
 end
