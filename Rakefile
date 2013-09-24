@@ -116,7 +116,7 @@ def write_login items
   file = 'bash_login'
   File.open(file, 'w') do |f|
     items.each do |item|
-      f.puts "source #{item}"
+      f.puts "source $HOME/#{item}"
     end
   end
   symlink "#{Dir.pwd}/#{file}", "#{ENV['HOME']}/.#{file}"
