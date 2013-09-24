@@ -132,8 +132,11 @@ def link_file(file)
       new_file.write ERB.new(File.read(file)).result(binding)
     end
   else
-    puts "linking ~/.#{file}"
-    unless File.exists? "#{ENV['HOME']}/.#{file}"
+    
+    if File.exists? "#{ENV['HOME']}/.#{file}"
+      puts "~/.#{file} already exists"
+    else
+      puts "linking ~/.#{file}"
       symlink "#{Dir.pwd}/#{file}", "#{ENV['HOME']}/.#{file}"
     end
   end
