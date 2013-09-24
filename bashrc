@@ -35,6 +35,3 @@ fi
 alias grep='grep --color'
 alias ln='ln -sin'
 alias gco='git checkout'
-alias source_home='source_dotfiles ~'
-source_home
-
