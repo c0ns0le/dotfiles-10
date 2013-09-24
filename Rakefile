@@ -113,11 +113,13 @@ def link_dir(src_path, dest_path)
 end
 
 def write_login items
-  File.open('bash_login', 'w') do |f|
+  file = 'bash_login'
+  File.open(file, 'w') do |f|
     items.each do |item|
       f.puts "source #{item}"
     end
   end
+  symlink file, "#{ENV['HOME']}/.#{file}"
 end
 
 def replace_file(file)
