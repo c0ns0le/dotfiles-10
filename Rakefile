@@ -64,9 +64,6 @@ desc "Write bash_login"
 task :login do
   home_files = get_files
   writeme = Array.new
-  if home_files.include? "#{ENV['HOME']}/.vimrc"
-    writeme.push '.vimrc'
-  end
   if home_files.include? "#{ENV['HOME']}/.bashrc"
     writeme.push '.bashrc'
   end
