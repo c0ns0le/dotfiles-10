@@ -133,9 +133,8 @@ def link_file(file)
     end
   else
     puts "linking ~/.#{file}"
-    unless symlink? "[ENV['HOME']]/.#{file}"
+    unless File.exists? "#{ENV['HOME']}/.#{file}"
       symlink "#{Dir.pwd}/#{file}", "#{ENV['HOME']}/.#{file}"
-    }
     end
   end
 end
