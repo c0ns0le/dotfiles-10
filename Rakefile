@@ -116,7 +116,9 @@ def write_login items
       f.puts "source $HOME/#{item}"
     end
   end
-  symlink "#{Dir.pwd}/#{file}", "#{ENV['HOME']}/.#{file}"
+  unless File.symlink? "#{ENV['HOME']}/.#{file}"
+    symlink "#{Dir.pwd}/#{file}", "#{ENV['HOME']}/.#{file}"
+  end
 end
 
 def replace_file(file)
