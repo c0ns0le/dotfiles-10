@@ -51,7 +51,7 @@ end
 desc "install sublime (3) packages"
 task :install_sublime_pkgs do
   host_os = RUBY_PLATFORM
-  file = "%s/Sublime/User" % Dir.pwd
+  file = "#{Dir.pwd}/Sublime/User"
   case host_os
   when /darwin|mac os/
     link_dir src_path = file, dest_path = "#{ENV['HOME']}/Library/Application\ Support/Sublime\ Text\ 3/Packages/User"
@@ -133,6 +133,6 @@ def link_file(file)
     end
   else
     puts "linking ~/.#{file}"
-    symlink "$PWD/#{file}", "$HOME/.#{file}"
+    symlink "#{Dir.pwd}/#{file}", "$HOME/.#{file}"
   end
 end
