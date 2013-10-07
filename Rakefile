@@ -9,102 +9,6 @@ def get_files
   return home_files.sort
 end
 
-task :default do
-  Rake::Task['install_vimrc'].invoke
-  Rake::Task['install_bashrc'].invoke
-  Rake::Task['install_gitrc'].invoke
-  Rake::Task['install_perforcerc'].invoke
-end
-
-desc "install vimrc into user's home directory"
-task :install_vimrc do
-  files = ['vimrc']
-  files.each do |file|
-    install_file src_file = file, dest_path = ENV['HOME']
-  end
-end
-
-desc "install bashrc into user's home directory"
-task :install_bashrc do
-  files = ['bashrc']
-  files.each do |file|
-    install_file src_file = file, dest_path = ENV['HOME']
-  end
-end
-
-desc "install git aliases for bashrc"
-task :install_gitrc do
-  files = ['vcs/git.bashrc']
-  files.each do |file|
-    install_file src_file = file, dest_path = "#{ENV['HOME']}/.vcs"
-  end
-end
-
-desc "install perforce aliases for bashrc"
-task :install_perforcerc do
-  files = ['vcs/perforce.bashrc']
-  files.each do |file|
-    install_file src_file = file, dest_path = "#{ENV['HOME']}/.vcs"
-  end
-end
-
-desc "install sublime (3) packages"
-task :install_sublime_pkgs do
-  host_os = RUBY_PLATFORM
-  file = "#{Dir.pwd}/Sublime/User"
-  case host_os
-  when /darwin|mac os/
-    link_dir src_path = file, dest_path = "#{ENV['HOME']}/Library/Application\ Support/Sublime\ Text\ 3/Packages/User"
-  else
-    puts 'OS Not Configured'
-  end
-end
-
-desc "Write bash_login"
-task :login do
-  home_files = get_files
-  writeme = Array.new
-  if home_files.include? "#{ENV['HOME']}/.bashrc"
-    writeme.push '.bashrc'
-  end
-  if home_files.include? "#{ENV['HOME']}/.vcs/git.bashrc"
-    writeme.push '.vcs/git.bashrc'
-  end
-  if home_files.include? "#{ENV['HOME']}/.vcs/perforce.bashrc"
-    writeme.push '.vcs/perforce.bashrc'
-  end
-
-  write_login writeme
-end
-
-def install_file src_file, dest_path
-  unless File.directory? dest_path
-    FileUtils.mkdir_p(dest_path)
-  end
-  if File.exist?(File.join(dest_path, ".#{src_file.sub(/\.erb$/, '')}"))
-    if File.identical? src_file, File.join(dest_path, ".#{src_file.sub(/\.erb$/, '')}")
-      puts "identical ~/.#{src_file.sub(/\.erb$/, '')}"
-    elsif replace_all
-      replace_file(file)
-    else
-      print "overwrite ~/.#{src_file.sub(/\.erb$/, '')}? [ynaq] "
-      case $stdin.gets.chomp
-      when 'a'
-        replace_all = true
-        replace_file(src_file)
-      when 'y'
-        replace_file(src_file)
-      when 'q'
-        exit
-      else
-        puts "skipping ~/.#{src_file.sub(/\.erb$/, '')}"
-      end
-    end
-  else
-    link_file(src_file)
-  end
-end
-
 def link_dir(src_path, dest_path)
   symlink src_path, dest_path
 end
@@ -140,5 +44,112 @@ def link_file(file)
       puts "linking ~/.#{file}"
       symlink "#{Dir.pwd}/#{file}", "#{ENV['HOME']}/.#{file}"
     end
+  end
+end
+
+def install_file src_file, dest_path
+  unless File.directory? dest_path
+    FileUtils.mkdir_p(dest_path)
+  end
+  if File.exist?(File.join(dest_path, ".#{src_file.sub(/\.erb$/, '')}"))
+    if File.identical? src_file, File.join(dest_path, ".#{src_file.sub(/\.erb$/, '')}")
+      puts "identical ~/.#{src_file.sub(/\.erb$/, '')}"
+    elsif replace_all
+      replace_file(file)
+    else
+      print "overwrite ~/.#{src_file.sub(/\.erb$/, '')}? [ynaq] "
+      case $stdin.gets.chomp
+      when 'a'
+        replace_all = true
+        replace_file(src_file)
+      when 'y'
+        replace_file(src_file)
+      when 'q'
+        exit
+      else
+        puts "skipping ~/.#{src_file.sub(/\.erb$/, '')}"
+      end
+    end
+  else
+    link_file(src_file)
+  end
+end
+
+task :default do
+  Rake::Task['install:vimrc'].invoke
+  Rake::Task['install:bashrc'].invoke
+  Rake::Task['install:gitrc'].invoke
+  Rake::Task['install:perforcerc'].invoke
+  Rake::Task['install:sublime_pkgs'].invoke
+  Rake::Task['config:login'].invoke
+end
+
+namespace :install do
+  desc "install vimrc into user's home directory"
+  task :vimrc do
+    files = ['vimrc']
+    files.each do |file|
+      install_file src_file = file, dest_path = ENV['HOME']
+    end
+  end
+
+  desc "install bashrc into user's home directory"
+  task :bashrc do
+    files = ['bashrc']
+    files.each do |file|
+      install_file src_file = file, dest_path = ENV['HOME']
+    end
+  end
+
+  desc "install git aliases for bashrc"
+  task :gitrc do
+    files = ['vcs/git.bashrc']
+    files.each do |file|
+      install_file src_file = file, dest_path = "#{ENV['HOME']}/.vcs"
+    end
+  end
+
+  desc "install perforce aliases for bashrc"
+  task :perforcerc do
+    files = ['vcs/perforce.bashrc']
+    files.each do |file|
+      install_file src_file = file, dest_path = "#{ENV['HOME']}/.vcs"
+    end
+  end
+
+  desc "install sublime (3) packages"
+  task :sublime_pkgs do
+    host_os = RUBY_PLATFORM
+    file = "#{Dir.pwd}/Sublime/User"
+    case host_os
+    when /darwin|mac os/
+      link_dir src_path = file, dest_path = "#{ENV['HOME']}/Library/Application\ Support/Sublime\ Text\ 3/Packages/User"
+    else
+      puts 'OS Not Configured'
+    end
+  end
+
+  desc 'Install Oh My ZSH'
+  task :zsh do
+    `curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh`
+  end
+end
+
+namespace :config do
+  desc "Write bash_login"
+  task :login do
+    home_files = get_files
+    writeme = Array.new
+    if home_files.include? "#{ENV['HOME']}/.bashrc"
+      writeme.push '.bashrc'
+    end
+    if home_files.include? "#{ENV['HOME']}/.vcs/git.bashrc"
+      writeme.push '.vcs/git.bashrc'
+    end
+    if home_files.include? "#{ENV['HOME']}/.vcs/perforce.bashrc"
+      writeme.push '.vcs/perforce.bashrc'
+    end
+
+    write_login writeme
   end
 end
