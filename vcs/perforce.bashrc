@@ -7,7 +7,8 @@ function pendlists {
     echo "$list"
   done
 }
-export P4EDITOR=/bin/vi
+
+export P4EDITOR=/usr/bin/vim
 
 #Aliases
 
