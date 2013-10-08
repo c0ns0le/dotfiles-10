@@ -77,11 +77,11 @@ end
 
 task :default do
   Rake::Task['install:vimrc'].invoke
-  Rake::Task['install:bashrc'].invoke
+  Rake::Task['install:zsh'].invoke
+  Rake::Task['install:zshrc'].invoke
   Rake::Task['install:gitrc'].invoke
   Rake::Task['install:perforcerc'].invoke
   Rake::Task['install:sublime_pkgs'].invoke
-  Rake::Task['config:login'].invoke
 end
 
 namespace :install do
@@ -93,9 +93,9 @@ namespace :install do
     end
   end
 
-  desc "install bashrc into user's home directory"
-  task :bashrc do
-    files = ['bashrc']
+  desc "install zshrc into user's home directory"
+  task :zshrc do
+    files = ['zshrc']
     files.each do |file|
       install_file src_file = file, dest_path = ENV['HOME']
     end
@@ -136,20 +136,4 @@ namespace :install do
 end
 
 namespace :config do
-  desc "Write bash_login"
-  task :login do
-    home_files = get_files
-    writeme = Array.new
-    if home_files.include? "#{ENV['HOME']}/.bashrc"
-      writeme.push '.bashrc'
-    end
-    if home_files.include? "#{ENV['HOME']}/.vcs/git.bashrc"
-      writeme.push '.vcs/git.bashrc'
-    end
-    if home_files.include? "#{ENV['HOME']}/.vcs/perforce.bashrc"
-      writeme.push '.vcs/perforce.bashrc'
-    end
-
-    write_login writeme
-  end
 end
