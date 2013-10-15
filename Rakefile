@@ -133,6 +133,14 @@ namespace :install do
   task :zsh do
     `curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh`
   end
+
+  desc 'Install vim plugins'
+  task :vim_plugins do
+    files = ["#{Dir.pwd}/vim"]
+    files.each do |file|
+      link_dir src_file = file, dest_path = "#{ENV['HOME']}/.vim"
+    end
+  end
 end
 
 namespace :config do
