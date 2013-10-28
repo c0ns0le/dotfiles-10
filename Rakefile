@@ -48,6 +48,7 @@ def link_file(file)
 end
 
 def install_file src_file, dest_path
+  replace_all = false
   unless File.directory? dest_path
     FileUtils.mkdir_p(dest_path)
   end
@@ -123,7 +124,9 @@ namespace :install do
     file = "#{Dir.pwd}/Sublime/User"
     case host_os
     when /darwin|mac os/
-      link_dir src_path = file, dest_path = "#{ENV['HOME']}/Library/Application\ Support/Sublime\ Text\ 3/Packages/User"
+      dest_path = "#{ENV['HOME']}/Library/Application\ Support/Sublime\ Text\ 3/Packages/"
+      rm_rf("#{dest_path}/User")
+      link_dir src_path = file, dest_path = dest_path
     else
       puts 'OS Not Configured'
     end
