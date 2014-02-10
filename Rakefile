@@ -48,6 +48,7 @@ def link_file(file)
 end
 
 def install_file src_file, dest_path
+  replace_all = false
   unless File.directory? dest_path
     FileUtils.mkdir_p(dest_path)
   end
@@ -77,11 +78,9 @@ end
 
 task :default do
   Rake::Task['install:vimrc'].invoke
-  Rake::Task['install:bashrc'].invoke
   Rake::Task['install:gitrc'].invoke
   Rake::Task['install:perforcerc'].invoke
   Rake::Task['install:sublime_pkgs'].invoke
-  Rake::Task['config:login'].invoke
 end
 
 namespace :install do
@@ -93,9 +92,9 @@ namespace :install do
     end
   end
 
-  desc "install bashrc into user's home directory"
-  task :bashrc do
-    files = ['bashrc']
+  desc "install zshrc into user's home directory"
+  task :zshrc do
+    files = ['zshrc']
     files.each do |file|
       install_file src_file = file, dest_path = ENV['HOME']
     end
@@ -123,7 +122,9 @@ namespace :install do
     file = "#{Dir.pwd}/Sublime/User"
     case host_os
     when /darwin|mac os/
-      link_dir src_path = file, dest_path = "#{ENV['HOME']}/Library/Application\ Support/Sublime\ Text\ 3/Packages/User"
+      dest_path = "#{ENV['HOME']}/Library/Application\ Support/Sublime\ Text\ 3/Packages/"
+      rm_rf("#{dest_path}/User")
+      link_dir src_path = file, dest_path = dest_path
     else
       puts 'OS Not Configured'
     end
@@ -141,23 +142,14 @@ namespace :install do
       link_dir src_file = file, dest_path = "#{ENV['HOME']}/.vim"
     end
   end
-end
 
-namespace :config do
-  desc "Write bash_login"
-  task :login do
-    home_files = get_files
-    writeme = Array.new
-    if home_files.include? "#{ENV['HOME']}/.bashrc"
-      writeme.push '.bashrc'
+  desc 'Install vim plugins'
+  task :vim_plugins do
+    files = ["#{Dir.pwd}/vim"]
+    files.each do |file|
+      link_dir src_file = file, dest_path = "#{ENV['HOME']}/.vim"
     end
-    if home_files.include? "#{ENV['HOME']}/.vcs/git.bashrc"
-      writeme.push '.vcs/git.bashrc'
-    end
-    if home_files.include? "#{ENV['HOME']}/.vcs/perforce.bashrc"
-      writeme.push '.vcs/perforce.bashrc'
-    end
-
-    write_login writeme
   end
+end
+namespace :config do
 end
