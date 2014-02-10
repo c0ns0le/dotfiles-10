@@ -77,10 +77,6 @@ def install_file src_file, dest_path
 end
 
 task :default do
-  Rake::Task['install:vimrc'].invoke
-  Rake::Task['install:gitrc'].invoke
-  Rake::Task['install:perforcerc'].invoke
-  Rake::Task['install:sublime_pkgs'].invoke
 end
 
 namespace :install do
