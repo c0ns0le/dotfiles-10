@@ -88,6 +88,14 @@ namespace :install do
     end
   end
 
+  desc "install bashrc into user's home directory"
+  task :bashrc do
+    files = ['bashrc']
+      files.each do |file|
+      install_file src_file = file, dest_path = ENV['HOME']
+    end
+  end
+  
   desc "install zshrc into user's home directory"
   task :zshrc do
     files = ['zshrc']
