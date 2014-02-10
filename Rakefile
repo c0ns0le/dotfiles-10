@@ -139,6 +139,11 @@ namespace :install do
     `curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh`
   end
 
+  desc 'Install RVM'
+  task :rvm do
+    `curl -sSL https://get.rvm.io | sh`
+  end
+
   # @TODO: Task is broken. Fix later.
   # desc 'Install vim plugins'
   # task :vim_plugins do
