@@ -144,6 +144,14 @@ namespace :install do
     `curl -sSL https://get.rvm.io | sh`
   end
 
+  desc 'Install F.lux for OS X'
+  task :flux do
+    `curl -O https://justgetflux.com/mac/Flux.zip`
+    `unzip Flux.zip`
+    `mv Flux.app /Applications`
+    `rm Flux.zip`
+  end
+
   # @TODO: Task is broken. Fix later.
   # desc 'Install vim plugins'
   # task :vim_plugins do
@@ -154,4 +162,12 @@ namespace :install do
   # end
 end
 namespace :config do
+  desc "Configure AWS paths [ZSH only]"
+  task :aws_paths do
+    awsplugin_path = "#{ENV['HOME']}/.oh-my-zsh/custom/plugins/aws"
+    files = ['aws.plugin.zsh']
+    files.each do |file|
+      install_file src_file = file, dest_path = "#{awsplugin_path}"
+    end
+  end
 end
