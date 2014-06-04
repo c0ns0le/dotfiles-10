@@ -146,12 +146,16 @@ namespace :install do
 
   desc 'Install F.lux for OS X'
   task :flux do
-    `curl -O https://justgetflux.com/mac/Flux.zip`
+    `wget https://justgetflux.com/mac/Flux.zip`
     `unzip Flux.zip`
     `mv Flux.app /Applications`
     `rm Flux.zip`
   end
 
+  desc 'Install Homebrew (OS X)'
+  task :brew do
+    `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"`
+  end
   # @TODO: Task is broken. Fix later.
   # desc 'Install vim plugins'
   # task :vim_plugins do
