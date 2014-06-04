@@ -154,7 +154,7 @@ namespace :install do
 
   desc 'Install Homebrew (OS X)'
   task :brew do
-    `ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"`
+    system('ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"')
   end
   # @TODO: Task is broken. Fix later.
   # desc 'Install vim plugins'
