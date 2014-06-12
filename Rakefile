@@ -10,7 +10,7 @@ def get_files
 end
 
 def link_dir(src_path, dest_path)
-  symlink src_path, dest_path
+  symlink src_path, dest_path, :force
 end
 
 def write_login items
@@ -25,57 +25,6 @@ def write_login items
   end
 end
 
-def replace_file(file)
-  FileUtils.rmtree "$HOME/.#{file.sub(/\.erb$/, '')}"
-  link_file(file)
-end
-
-def link_file(file)
-  if file =~ /.erb$/
-    puts "generating ~/.#{file.sub(/\.erb$/, '')}"
-    File.open(File.join(ENV['HOME'], ".#{file.sub(/\.erb$/, '')}"), 'w') do |new_file|
-      new_file.write ERB.new(File.read(file)).result(binding)
-    end
-  else
-    
-    if File.exists? "#{ENV['HOME']}/.#{file}"
-      puts "~/.#{file} already exists"
-    else
-      puts "linking ~/.#{file}"
-      symlink "#{Dir.pwd}/#{file}", "#{ENV['HOME']}/.#{file}"
-    end
-  end
-end
-
-def install_file src_file, dest_path
-  replace_all = false
-  unless File.directory? dest_path
-    FileUtils.mkdir_p(dest_path)
-  end
-  if File.exist?(File.join(dest_path, ".#{src_file.sub(/\.erb$/, '')}"))
-    if File.identical? src_file, File.join(dest_path, ".#{src_file.sub(/\.erb$/, '')}")
-      puts "identical ~/.#{src_file.sub(/\.erb$/, '')}"
-    elsif replace_all
-      replace_file(file)
-    else
-      print "overwrite ~/.#{src_file.sub(/\.erb$/, '')}? [ynaq] "
-      case $stdin.gets.chomp
-      when 'a'
-        replace_all = true
-        replace_file(src_file)
-      when 'y'
-        replace_file(src_file)
-      when 'q'
-        exit
-      else
-        puts "skipping ~/.#{src_file.sub(/\.erb$/, '')}"
-      end
-    end
-  else
-    link_file(src_file)
-  end
-end
-
 task :default do
 end
 
@@ -83,22 +32,6 @@ namespace :install do
   desc "install vimrc into user's home directory"
   task :vimrc do
     files = ['vimrc']
-    files.each do |file|
-      install_file src_file = file, dest_path = ENV['HOME']
-    end
-  end
-
-  desc "install bashrc into user's home directory"
-  task :bashrc do
-    files = ['bashrc']
-      files.each do |file|
-      install_file src_file = file, dest_path = ENV['HOME']
-    end
-  end
-
-  desc "install zshrc into user's home directory"
-  task :zshrc do
-    files = ['zshrc']
     files.each do |file|
       install_file src_file = file, dest_path = ENV['HOME']
     end
@@ -156,6 +89,7 @@ namespace :install do
   task :brew do
     system('ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"')
   end
+
   # @TODO: Task is broken. Fix later.
   # desc 'Install vim plugins'
   # task :vim_plugins do
@@ -172,6 +106,22 @@ namespace :config do
     files = ['aws.plugin.zsh']
     files.each do |file|
       install_file src_file = file, dest_path = "#{awsplugin_path}"
+    end
+  end
+
+  desc 'Configure bashrc'
+  task :bashrc do
+    files = ["#{Dir.pwd}/bash/bashrc"]
+    files.each do |file|
+      symlink file, "#{ENV['HOME']}/.bashrc", :force => true
+    end
+  end
+
+  desc 'Configure zshrc'
+  task :zshrc do
+    files = ["#{Dir.pwd}/zsh/zshrc"]
+    files.each do |file|
+      symlink file, "#{ENV['HOME']}/.zshrc", :force => true
     end
   end
 end
