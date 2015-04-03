@@ -1,0 +1,24 @@
+"*":
+  editor:
+    fontFamily: "Courier New"
+    showIndentGuide: true
+    invisibles: {}
+  core:
+    disabledPackages: [
+      "git-plus"
+      "linter-rubocop"
+      "linter"
+    ]
+    projectHome: "/Users/ali/code"
+  "exception-reporting":
+    userId: "d4efaa67-4ea3-de6f-ea14-09270d232311"
+  "release-notes":
+    viewedVersion: "0.94.0"
+  welcome:
+    showOnStartup: false
+  metrics:
+    userId: "44edc941840c87dd1cf98a0d605a1fa48c3e1883"
+  linter:
+    statusBar: "Show all errors"
+    lintDebug: true
+    showInfoMessages: true

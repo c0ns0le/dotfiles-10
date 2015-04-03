@@ -4,6 +4,9 @@ source ~/.antigen_git/antigen.zsh
 ## Auto Update
 antigen bundle unixorn/autoupdate-antigen.zshplugin
 
+# Prompt
+antigen bundle nojhan/liquidprompt
+
 ## Lib files
 antigen bundle robbyrussell/oh-my-zsh lib/
 
@@ -18,6 +21,13 @@ antigen bundle adb
 antigen bundle rupa/z
 antigen bundle supercrabtree/k
 antigen bundle s7anley/zsh-geeknote
+antigen bundle tarruda/zsh-autosuggestions
+antigen bundle history
+antigen bundle vi-mode
+antigen bundle chrissicool/zsh-256color
+antigen bundle horosgrisa/autoenv
+antigen bundle https://github.com/zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-completions src
 
 ## Ruby Bundles
 antigen bundle ruby
@@ -56,10 +66,24 @@ export APK_HOME="$DOWNLOAD_HOME/APKs"
 # TEM
 source ~/code/git/tem/em.sh
 
-# Use EMacs mode
-bindkey -e
-
 # online help
 #unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/help 
+
+# Brew
+brew install android-platform-tools
+brew install csshx
+brew install gcc46
+brew install glib
+brew install hub
+brew install lastpass-cli
+brew install rbenv
+brew install reattach-to-user-namespace
+brew install ruby-build
+brew install tmux
+brew install watch
+brew install wget
+brew install zsh
+brew install zsh-completions
+brew install zsh-syntax-highlighting
