@@ -1,5 +1,5 @@
 # Antigen
-source ~/.antigen_git/antigen.zsh
+source ${0%/*}/../antigen/antigen.zsh
 
 ## Auto Update
 antigen bundle unixorn/autoupdate-antigen.zshplugin
@@ -63,27 +63,6 @@ alias apk_install="$ADB_HOME/adb install -r $@"
 export DOWNLOAD_HOME="$HOME/Downloads"
 export APK_HOME="$DOWNLOAD_HOME/APKs"
 
-# TEM
-source ~/code/git/tem/em.sh
-
 # online help
-#unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/help 
-
-# Brew
-brew install android-platform-tools
-brew install csshx
-brew install gcc46
-brew install glib
-brew install hub
-brew install lastpass-cli
-brew install rbenv
-brew install reattach-to-user-namespace
-brew install ruby-build
-brew install tmux
-brew install watch
-brew install wget
-brew install zsh
-brew install zsh-completions
-brew install zsh-syntax-highlighting
