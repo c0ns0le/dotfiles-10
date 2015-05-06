@@ -126,4 +126,11 @@ namespace :config do
     system('chmod 0700 ~/.ssh')
     system('ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa')
   end
+
+  desc 'link atom dir'
+  task :atom do
+    system("ln -sin #{File.dirname(__FILE__)}/atom #{ENV['HOME']}/atom")
+    system("mv #{ENV['HOME']}/atom #{ENV['HOME']}/.atom")
+  end
 end
+
