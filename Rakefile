@@ -72,11 +72,6 @@ namespace :install do
     `curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh`
   end
 
-  desc 'Install RVM'
-  task :rvm do
-    `curl -sSL https://get.rvm.io | sh`
-  end
-
   desc 'Install F.lux for OS X'
   task :flux do
     `wget https://justgetflux.com/mac/Flux.zip`
