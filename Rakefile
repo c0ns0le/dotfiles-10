@@ -124,5 +124,6 @@ namespace :config do
   task :ssh do
     system('mkdir ~/.ssh')
     system('chmod 0700 ~/.ssh')
+    system('ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa')
   end
 end
