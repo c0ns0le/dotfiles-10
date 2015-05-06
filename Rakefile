@@ -116,9 +116,13 @@ namespace :config do
 
   desc 'Configure zshrc'
   task :zshrc do
-    files = ["#{Dir.pwd}/zsh/zshrc"]
-    files.each do |file|
-      symlink file, "#{ENV['HOME']}/.zshrc", :force => true
-    end
+    File.write('/Users/ali/.zshrc', "source #{File.dirname(__FILE__)}/zsh/zshrc") unless File.readable?('/Users/ali/.zshrc')
+    system('git submodule update --init --recursive')
+  end
+
+  desc 'create ssh dir'
+  task :ssh do
+    system('mkdir ~/.ssh')
+    system('chmod 0700 ~/.ssh')
   end
 end
