@@ -28,12 +28,16 @@ antigen bundle chrissicool/zsh-256color
 antigen bundle horosgrisa/autoenv
 antigen bundle https://github.com/zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-completions src
+antigen bundle tmux
+antigen bundle tmuxinator
 
 ## Ruby Bundles
 antigen bundle ruby
 antigen bundle gem
 antigen bundle rbenv
 antigen bundle bundler
+
+antigen bundle pelletiermaxime/test-kitchen-zsh-plugin
 
 ## OS specific plugins
 if [[ $CURRENT_OS == 'OS X' ]]; then
@@ -69,3 +73,6 @@ HELPDIR=/usr/local/share/zsh/help
 
 # ATOM
 export ATOM_HOME=${0%/*}/../atom
+
+# The Fuck
+alias fuck='$(thefuck $(fc -ln -1))'
