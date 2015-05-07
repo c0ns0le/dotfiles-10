@@ -76,3 +76,6 @@ export ATOM_HOME=${0%/*}/../atom
 
 # The Fuck
 alias fuck='$(thefuck $(fc -ln -1))'
+
+# RbEnv init
+eval "$(rbenv init -)"
