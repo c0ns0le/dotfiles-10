@@ -67,7 +67,7 @@ namespace :install do
 
   desc 'Install vim plugins'
   task :vim_plugins do
-    system("git clone https://github.com/gmarik/Vundle.vim.git #{ENV['HOME']}/.vim/bundle/Vundle.vim")
+    system('git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim')
     system('vim +PluginInstall +qall')
   end
 end
