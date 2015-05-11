@@ -31,10 +31,7 @@ end
 namespace :install do
   desc "install vimrc into user's home directory"
   task :vimrc do
-    files = ['vimrc']
-    files.each do |file|
-      install_file src_file = file, dest_path = ENV['HOME']
-    end
+    system("ln -sin #{File.dirname(__FILE__)}/vimrc #{ENV['HOME']}/.vimrc")
   end
 
   desc "install git aliases for bashrc"
@@ -53,25 +50,6 @@ namespace :install do
     end
   end
 
-  desc "install sublime (3) packages"
-  task :sublime_pkgs do
-    host_os = RUBY_PLATFORM
-    file = "#{Dir.pwd}/Sublime/User"
-    case host_os
-    when /darwin|mac os/
-      dest_path = "#{ENV['HOME']}/Library/Application\ Support/Sublime\ Text\ 3/Packages/"
-      rm_rf("#{dest_path}/User")
-      link_dir src_path = file, dest_path = dest_path
-    else
-      puts 'OS Not Configured'
-    end
-  end
-
-  desc 'Install Oh My ZSH'
-  task :zsh do
-    `curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh`
-  end
-
   desc 'Install F.lux for OS X'
   task :flux do
     `wget https://justgetflux.com/mac/Flux.zip`
@@ -87,25 +65,14 @@ namespace :install do
     system('brew bundle')
   end
 
-  # @TODO: Task is broken. Fix later.
-  # desc 'Install vim plugins'
-  # task :vim_plugins do
-  #   files = ["#{Dir.pwd}/vim"]
-  #   files.each do |file|
-  #     link_dir src_file = file, dest_path = "#{ENV['HOME']}/.vim"
-  #   end
-  # end
-end
-namespace :config do
-  desc "Configure AWS paths [ZSH only]"
-  task :aws_paths do
-    awsplugin_path = "#{ENV['HOME']}/.oh-my-zsh/custom/plugins/aws"
-    files = ['aws.plugin.zsh']
-    files.each do |file|
-      install_file src_file = file, dest_path = "#{awsplugin_path}"
-    end
+  desc 'Install vim plugins'
+  task :vim_plugins do
+    system("git clone https://github.com/gmarik/Vundle.vim.git #{ENV['HOME']}/.vim/bundle/Vundle.vim")
+    system('vim +PluginInstall +qall')
   end
+end
 
+namespace :config do
   desc 'Configure bashrc'
   task :bashrc do
     files = ["#{Dir.pwd}/bash/bashrc"]
