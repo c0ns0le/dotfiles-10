@@ -32,6 +32,7 @@ namespace :install do
   desc "install vimrc into user's home directory"
   task :vimrc do
     system("ln -sin #{File.dirname(__FILE__)}/vimrc #{ENV['HOME']}/.vimrc")
+    system("mkdir -p #{ENV['HOME']}/.vim/swap")
   end
 
   desc "install git aliases for bashrc"
