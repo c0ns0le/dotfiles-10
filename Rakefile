@@ -105,5 +105,11 @@ namespace :config do
   task :tmux do
     system("ln -sin #{File.dirname(__FILE__)}/tmux.conf #{ENV['HOME']}/.tmux.conf")
   end
+
+  desc 'configure thefuck'
+  task :thefuck do
+    system("mkdir #{ENV['HOME']}/.thefuck")
+    system("ln -sin #{File.dirname(__FILE__)}/thefuck/settings.py #{ENV['HOME']}/.thefuck/settings.py")
+  end
 end
 
