@@ -132,5 +132,10 @@ namespace :config do
     system("ln -sin #{File.dirname(__FILE__)}/atom #{ENV['HOME']}/atom")
     system("mv #{ENV['HOME']}/atom #{ENV['HOME']}/.atom")
   end
+
+  desc 'link tmux conf'
+  task :tmux do
+    system("ln -sin #{File.dirname(__FILE__)}/tmux.conf #{ENV['HOME']}/.tmux.conf")
+  end
 end
 
