@@ -3,11 +3,12 @@
     fontFamily: "Courier New"
     showIndentGuide: true
     invisibles: {}
+    showInvisibles: true
+    softWrapAtPreferredLineLength: true
   core:
     disabledPackages: [
       "git-plus"
       "linter-rubocop"
-      "linter"
     ]
     projectHome: "/Users/ali/code"
   "exception-reporting":
@@ -22,3 +23,6 @@
     statusBar: "Show all errors"
     lintDebug: true
     showInfoMessages: true
+  tabs:
+    enableVcsColoring: true
+    usePreviewTabs: true
