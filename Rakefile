@@ -51,21 +51,6 @@ namespace :install do
     end
   end
 
-  desc 'Install F.lux for OS X'
-  task :flux do
-    `wget https://justgetflux.com/mac/Flux.zip`
-    `unzip Flux.zip`
-    `mv Flux.app /Applications`
-    `rm Flux.zip`
-  end
-
-  desc 'Install Homebrew (OS X)'
-  task :brew do
-    system('ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
-    system('brew tap homebrew/bundle')
-    system('brew bundle')
-  end
-
   desc 'Install vim plugins'
   task :vim_plugins do
     system('git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim')
