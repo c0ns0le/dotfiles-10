@@ -1,28 +1,28 @@
 "*":
-  editor:
-    fontFamily: "Courier New"
-    showIndentGuide: true
-    invisibles: {}
-    showInvisibles: true
-    softWrapAtPreferredLineLength: true
   core:
     disabledPackages: [
       "git-plus"
       "linter-rubocop"
     ]
     projectHome: "/Users/ali/code"
+  editor:
+    fontFamily: "Courier New"
+    invisibles: {}
+    showIndentGuide: true
+    showInvisibles: true
+    softWrapAtPreferredLineLength: true
   "exception-reporting":
     userId: "d4efaa67-4ea3-de6f-ea14-09270d232311"
-  "release-notes":
-    viewedVersion: "0.94.0"
-  welcome:
-    showOnStartup: false
-  metrics:
-    userId: "44edc941840c87dd1cf98a0d605a1fa48c3e1883"
   linter:
-    statusBar: "Show all errors"
     lintDebug: true
     showInfoMessages: true
+    statusBar: "Show all errors"
+  metrics:
+    userId: "44edc941840c87dd1cf98a0d605a1fa48c3e1883"
+  "release-notes":
+    viewedVersion: "0.94.0"
   tabs:
     enableVcsColoring: true
     usePreviewTabs: true
+  welcome:
+    showOnStartup: false
