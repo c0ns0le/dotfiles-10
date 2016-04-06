@@ -10,6 +10,7 @@ Plugin 'scrooloose/nerdtree' " nerdtree
 Plugin 'tpope/vim-fugitive' " fun with git
 Plugin 'bling/vim-airline' " powerline
 Plugin 'ekalinin/Dockerfile.vim' " docker syntax
+Plugin 'nathanaelkane/vim-indent-guides' " indent guides
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
