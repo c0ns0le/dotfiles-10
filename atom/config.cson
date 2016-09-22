@@ -2,25 +2,41 @@
   core:
     disabledPackages: [
       "git-plus"
+      "rst-preview"
       "linter-rubocop"
+      "ginkgo-and-gomega-snippets"
+      "activate-power-mode"
+      "linter-erb"
+      "linter-shellcheck"
     ]
     projectHome: "/Users/ali/code"
+    themes: [
+      "dracula-ui"
+      "dracula-theme"
+    ]
   editor:
     fontFamily: "Courier New"
     invisibles: {}
     showIndentGuide: true
-    showInvisibles: true
     softWrapAtPreferredLineLength: true
   "exception-reporting":
     userId: "d4efaa67-4ea3-de6f-ea14-09270d232311"
   linter:
+    errorPanelHeight: 542
     lintDebug: true
+    showErrorTabLine: true
     showInfoMessages: true
     statusBar: "Show all errors"
+  "linter-erb":
+    erbExecutablePath: "/usr/local/opt/rbenv/shims/erb"
+    trimMode: "-"
   metrics:
     userId: "44edc941840c87dd1cf98a0d605a1fa48c3e1883"
+  "python-autopep8": {}
   "release-notes":
     viewedVersion: "0.94.0"
+  "rst-preview-pandoc":
+    pandocOpts: "-frst -thtml --webtex"
   tabs:
     enableVcsColoring: true
     usePreviewTabs: true

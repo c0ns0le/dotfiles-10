@@ -12,3 +12,8 @@
 #   editor = editorView.getEditor()
 #   if path.extname(editor.getPath()) is '.md'
 #     editor.setSoftWrap(true)
+process.env.PATH = ["/usr/bin",
+                    "/usr/local/bin",
+                    "/Users/ali/Library/Python/2.7/bin/",
+                    "/usr/local/opt/rbenv/shims/",
+                    ].join(":")
