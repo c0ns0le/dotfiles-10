@@ -10,6 +10,7 @@
       "linter-shellcheck"
     ]
     projectHome: "/Users/ali/code"
+    telemetryConsent: "limited"
     themes: [
       "dracula-ui"
       "dracula-theme"

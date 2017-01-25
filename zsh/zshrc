@@ -1,9 +1,6 @@
 # Antigen
 source ${0%/*}/../antigen/antigen.zsh
 
-## Auto Update
-antigen bundle unixorn/autoupdate-antigen.zshplugin
-
 # Prompt
 antigen bundle nojhan/liquidprompt
 
