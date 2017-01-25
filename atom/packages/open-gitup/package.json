@@ -1,0 +1,46 @@
+{
+  "name": "open-gitup",
+  "main": "./lib/open-gitup",
+  "version": "0.0.8",
+  "description": "Open GitUp from Atom",
+  "keywords": [
+    "git",
+    "GitUp",
+    "GitHub"
+  ],
+  "activationCommands": {
+    "atom-workspace": "open-gitup:open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoshitakame/open-gitup.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {},
+  "readme": "# Open GitUp from Atom\n\nOpen editting file's project on [GitUp](http://gitup.co), a powerful git client of Mac OS X! :octocat:\n\n<a href=\"https://gyazo.com/048781b86e0aea831e989ec65eea4327\"><img src=\"https://i.gyazo.com/048781b86e0aea831e989ec65eea4327.gif\" /></a>\n\n## What you need\n\n- mac OS X\n- GitUp.app\n- Command Line Tool for GitUp\n\n## Keymap\n\nYou can change keymap by editting `keymap.cson`. This is default keymap :\n\n```\n'atom-workspace':\n  'ctrl-alt-g': 'open-gitup:open'\n```\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/yoshitakame/open-gitup/issues"
+  },
+  "homepage": "https://github.com/yoshitakame/open-gitup#readme",
+  "_id": "open-gitup@0.0.8",
+  "_shasum": "917d04413572b30b74f6dc5a854c7ce8ed02fd91",
+  "_resolved": "file:../d-116318-4300-1g3a0os/package.tgz",
+  "_from": "../d-116318-4300-1g3a0os/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".coffee": [
+        "lib/open-gitup.coffee"
+      ],
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}

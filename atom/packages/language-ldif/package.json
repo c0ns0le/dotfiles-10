@@ -1,0 +1,34 @@
+{
+  "name": "language-ldif",
+  "version": "0.3.0",
+  "description": "LDIF support in Atom.",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jolkdarr/language-ldif.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {},
+  "readme": "# LDIF support for Atom editor.",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/jolkdarr/language-ldif/issues"
+  },
+  "homepage": "http://github.com/jolkdarr/language-ldif",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  },
+  "_id": "language-ldif@0.3.0",
+  "_shasum": "f3c1384f66ceafbec9b7cbec09e75de1f8cbd053",
+  "_resolved": "file:../d-116411-46764-15cmcrv/package.tgz",
+  "_from": "../d-116411-46764-15cmcrv/package.tgz"
+}

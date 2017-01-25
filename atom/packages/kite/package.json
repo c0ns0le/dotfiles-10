@@ -1,0 +1,118 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117010-30079-1f5655y/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117010-30079-1f5655y/package.tgz",
+        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117010-30079-1f5655y/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117010-30079-2r1244"
+    ]
+  ],
+  "_from": "../d-117010-30079-1f5655y/package.tgz",
+  "_id": "kite@0.6.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/kite",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117010-30079-1f5655y/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117010-30079-1f5655y/package.tgz",
+    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117010-30079-1f5655y/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-117010-30079-1f5655y/package.tgz",
+  "_shasum": "d76e6dbc8c02de6154f17614b46233848ea29025",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117010-30079-1f5655y/package.tgz",
+  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117010-30079-2r1244",
+  "bugs": {
+    "url": "https://github.com/kiteco/atom-plugin/issues"
+  },
+  "configSchema": {
+    "enableCompletions": {
+      "type": "boolean",
+      "default": true,
+      "title": "Enable Completions",
+      "description": "Show auto-completions from Kite as Atom suggestions"
+    },
+    "checkReadiness": {
+      "type": "boolean",
+      "default": false,
+      "title": "Check Kite Status",
+      "description": "Check this box to check the status of the Kite auto-complete daemon."
+    }
+  },
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^1.0.0": "consumeStatusBar"
+      }
+    }
+  },
+  "dependencies": {
+    "kite-installer": "^0.7.2",
+    "mixpanel": "^0.5.0"
+  },
+  "description": "Python programming copilot — Kite shows cloud-powered completions, documentation, and examples.",
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.11.1",
+    "eslint-config": "^0.3.0",
+    "eslint-config-fbjs": "^1.1.1",
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-flowtype": "^2.29.1",
+    "eslint-plugin-jasmine": "^2.2.0",
+    "eslint-plugin-prefer-object-spread": "^1.1.0",
+    "eslint-plugin-react": "^6.8.0",
+    "fbjs": "^0.8.6",
+    "javascript-obfuscator": "^0.8.3"
+  },
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/kiteco/atom-plugin#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "./lib/kite",
+  "name": "kite",
+  "optionalDependencies": {},
+  "providedServices": {
+    "autocomplete.provider": {
+      "versions": {
+        "2.0.0": "completions"
+      }
+    }
+  },
+  "readme": "Kite for Atom\n=============\n\nThis is the private repository with the plugin sources. The public version can be found in the [atom-plugin-public repository](https://github.com/kiteco/atom-plugin-public).\n\nAs long as this repository is private **never publish the package from here** (see more on publication below).\n\n## Installation\n\nTo setup the development environment run the following commands:\n\n```sh\ngit clone git@github.com:kiteco/atom-plugin.git\napm install\nnpm run setup\n```\n\nThe `npm run setup` command will create a `public` directory in the project that will be a clone of the `atom-plugin-public` repository.\n\n## Testing Your Local Changes\n\nRun `apm link` in the private plugin directory and reload Atom.\n\n## Testing The Public Version\n\nRun `apm link` in the plugin plugin directory and reload Atom.\n\n## Build The Public Plugin\n\nRun the `npm run publish:prepare` command to copy all the files and obfuscate the sources into the `public directory`.\n\nThis command does not publish anything yet, it's just updating the public directory with the latest code and assets.\n\n## Publish A New Version\n\nTo publish a new version of the public plugin a few operations are required, which are packaged in the `npm run publish:*` commands.\n\nIn a nutshell:\n\n1. The `publish:prepare` command will be run, copying the assets and obfuscating the sources in the public directory.\n2. The `package.json` file of the public plugin will be updated with the latest changes from the private one through the `package:public` command. Fields like `dependencies` and atom related fields will be updated using the private `package.json` as the source of trust.\n3. Then the changes are committed using the `commit:public` command.\n4. The new version is then published through `apm publish` and the version argument corresponding to the npm script used initially.\n5. Once published, the new package's version is then copied back to the private `package.json` file, a new commit is created and tagged with that version so that the private and public repositories tags stay in sync. All of this is done using the `commit:private` command.\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiteco/atom-plugin.git"
+  },
+  "scripts": {
+    "commit:private": "node ./scripts/update-version-and-tag.js",
+    "commit:public": "cd public; git add -A; git commit -am \"Prepare release\"",
+    "copy": "sh ./scripts/copy.sh",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "obfuscate": "sh ./scripts/obfuscate.sh",
+    "package:public": "node ./scripts/update-package-json.js",
+    "publish:major": "sh ./scripts/publish.sh major",
+    "publish:minor": "sh ./scripts/publish.sh minor",
+    "publish:patch": "sh ./scripts/publish.sh patch",
+    "publish:prepare": "npm run copy && npm run obfuscate",
+    "setup": "sh ./scripts/setup.sh"
+  },
+  "version": "0.6.4"
+}

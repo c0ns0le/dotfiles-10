@@ -1,0 +1,96 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/stylesheets/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+
+.ult-terminal {
+  &.panel {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    white-space: pre;
+    word-wrap: break-word;
+    font-size: 14px;
+    font-family: monospace;
+  }
+  .panel-heading {
+    flex-shrink: 0;
+    padding: 2px;
+    font-family: @font-family;
+    text-align: right;
+    .btn {
+      top: 0;
+      height: auto;
+      font-size: inherit;
+    }
+    .ult-terminal-heading-text {
+      line-height: 20px;
+    }
+  }
+  .terminal {
+    flex-grow: 1;
+    overflow-y: scroll;
+    bottom: @component-padding;
+
+    a {
+      color: #6494ed;
+      &:hover {
+        color: #76a0ef;
+      }
+    }
+
+    .icon:before {
+      margin-right: 0;
+    }
+    .file-info {
+      width: 140px;
+      float: left;
+      padding-right: 1ch;
+    }
+    .stat-program {
+      color: #26c26a;
+    }
+    .stat-link {
+      color: hsl(285, 0.7, 0.7);
+    }
+    .clear {
+      clear: both;
+    }
+
+    [data-targettype=file] {
+      cursor: pointer;
+    }
+  }
+  atom-text-editor {
+    flex-shrink: 0;
+  }
+  .status-ignored {
+    opacity: 0.5;
+  }
+}
+
+.ult-terminal-status {
+  .icon {
+    cursor: pointer;
+  }
+  .icon-terminal {
+    border-bottom: solid 2px transparent;
+  }
+  .status-opened {
+    transition: border-color .15s;
+    border-bottom-color: initial;
+  }
+  .status-running {
+    color: hsl(180, 1, 0.5);
+  }
+  .status-info {
+    color: hsl(220, 1, 0.5);
+  }
+  .status-success {
+    color: hsl(100, 1, 0.5);
+  }
+  .status-error {
+    color: hsl(0, 1, 0.5);
+  }
+}

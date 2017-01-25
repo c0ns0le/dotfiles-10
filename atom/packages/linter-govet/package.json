@@ -1,0 +1,45 @@
+{
+  "name": "linter-govet",
+  "linter-package": true,
+  "main": "./lib/init",
+  "version": "0.1.5",
+  "description": "Check Go files with go vet tool",
+  "keywords": [
+    "go",
+    "golang",
+    "linter"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AtomLinter/linter-govet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AtomLinter/linter-govet/issues"
+  },
+  "homepage": "https://github.com/AtomLinter/linter-govet",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=0.174.0 <2.0.0"
+  },
+  "readme": "linter-govet\n=========================\n\nThis linter plugin for [Linter](https://github.com/AtomLinter/Linter) provides an interface to Go's `go vet`. It will be used with files that have the `Go` syntax.\n\n## Installation\nLinter package must be installed in order to use this plugin. If Linter is not installed, please follow the instructions [here](https://github.com/AtomLinter/Linter).\n\n### Plugin installation\n```\n$ apm install linter-govet\n```\n\n## Settings\nYou must configure linter-govet by editing ~/.atom/config.cson (choose Open Your Config in Atom menu):\n```\n'linter-govet':\n  'executablePath': path to Go executable. Use `which go` to find it out.\n```\n\n## Contributing\nIf you would like to contribute enhancements or fixes, please do the following:\n\n1. Fork the plugin repository.\n1. Hack on a separate topic branch created from the latest `master`.\n1. Commit and push the topic branch.\n1. Make a pull request.\n1. welcome to the club\n\nPlease note that modifications should follow these coding guidelines:\n\n- Indent is 2 spaces.\n- Code should pass coffeelint linter.\n- Vertical whitespace helps readability, don’t be afraid to use it.\n\nThank you for helping out!\n",
+  "readmeFilename": "README.md",
+  "_id": "linter-govet@0.1.5",
+  "_shasum": "4a4487ca8ef2554664a8784c09094efbbd35cb6a",
+  "_resolved": "file:../d-116326-22137-1ws85q8/package.tgz",
+  "_from": "../d-116326-22137-1ws85q8/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".json": [
+        "coffeelint.json",
+        "package.json"
+      ],
+      ".coffee": [
+        "lib/init.coffee",
+        "lib/linter-govet.coffee"
+      ]
+    },
+    "folders": []
+  }
+}

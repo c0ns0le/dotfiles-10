@@ -1,0 +1,41 @@
+{
+  "name": "yard",
+  "main": "./lib/yard",
+  "version": "0.3.1",
+  "description": "YARD Documentation generator (Ruby)",
+  "activationCommands": {
+    "atom-workspace": "yard:create"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlosbaraza/yard.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {},
+  "readme": "# YARD Generator (Atom package)\n\nYARD is a commonly used Ruby documentation tool. This package will accelerate\nthe creation of the YARD-style comments for your methods and classes.\n\n### Usage\n\nTo use it is as simple as situating on a method and pressing `ctrl + enter`.\nThis will analyse the method params and generate the following snippet for the\ndocumentation:\n\n```\nclass UndocumentedClass\n  # Description of method\n  #\n  # @param [Type] param1 describe param1\n  # @param [Type] param2=3 describe param2=3\n  # @return [Type] description of returned object\n  def undocumented_method(param1, param2=3)\n    'The method is not documented!'\n  end\nend\n```\n\n`Tab`/`shift + Tab` keys could be used to jump to the next param, description or\nType.\n\n### Future\n\nI will update this package soon with more intelligence and features:\n* **Analyse better the method params.\n* **Implement for class.\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/carlosbaraza/yard/issues"
+  },
+  "homepage": "https://github.com/carlosbaraza/yard#readme",
+  "_id": "yard@0.3.1",
+  "_shasum": "c104b69278797b489595c0688a1b1c7e8511ff09",
+  "_resolved": "file:../d-116418-9124-atj7eh/package.tgz",
+  "_from": "../d-116418-9124-atj7eh/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [],
+    "extensions": {
+      ".coffee": [
+        "lib/yard.coffee"
+      ],
+      ".json": [
+        "package.json"
+      ]
+    },
+    "folders": []
+  }
+}

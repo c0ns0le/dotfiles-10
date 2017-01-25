@@ -1,0 +1,125 @@
+{
+  "name": "linter-json-lint",
+  "main": "./lib/init",
+  "version": "0.1.1",
+  "description": "Lint `json` on the fly, using json-lint",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josa42/atom-linter-json-lint.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint lib"
+  },
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "atom-package-deps": "^4.0.1",
+    "json-lint": "^0.1.0 "
+  },
+  "package-deps": [
+    "linter"
+  ],
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  },
+  "devDependencies": {
+    "babel-eslint": "^4.1.5",
+    "eslint": "^2.1.0"
+  },
+  "readme": "# linter-json-lint\n\n[![Build Status](https://img.shields.io/travis/josa42/atom-linter-json-lint.svg?style=flat-square)](https://travis-ci.org/josa42/atom-linter-json-lint)\n[![Plugin installs!](https://img.shields.io/apm/dm/linter-json-lint.svg?style=flat-square)](https://atom.io/packages/linter-json-lint)\n[![Package version!](https://img.shields.io/apm/v/linter-json-lint.svg?style=flat-square)](https://atom.io/packages/linter-json-lint)\n[![Dependencies!](https://img.shields.io/david/josa42/atom-linter-json-lint.svg?style=flat-square)](https://david-dm.org/josa42/atom-linter-json-lint)\n\nThis linter plugin for [Linter](https://github.com/atom-community/linter) provides an interface to [json-lint](https://github.com/codenothing/jsonlint).\n\n## Configuration\n\n* **Allow Comments**\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/josa42/atom-linter-json-lint/issues"
+  },
+  "homepage": "https://github.com/josa42/atom-linter-json-lint#readme",
+  "_id": "linter-json-lint@0.1.1",
+  "_shasum": "27622f2e4dc82f449438a3d8d2dbd78928d9c5e8",
+  "_resolved": "file:../d-116320-15577-1lc1ega/package.tgz",
+  "_from": "../d-116320-15577-1lc1ega/package.tgz",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "atom-package-deps",
+        "version": "4.0.1",
+        "path": "node_modules/atom-package-deps/lib/index.js"
+      },
+      {
+        "name": "atom-package-path",
+        "version": "1.1.0",
+        "path": "node_modules/atom-package-deps/node_modules/atom-package-path/lib/index.js"
+      },
+      {
+        "name": "sb-callsite",
+        "version": "1.1.2",
+        "path": "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/lib/main.js"
+      },
+      {
+        "name": "json-lint",
+        "version": "0.1.0",
+        "path": "node_modules/json-lint/jsonlint.js"
+      }
+    ],
+    "extensions": {
+      ".js": [
+        "lib/init.js",
+        "lib/linter-json-lint-provider.js",
+        "node_modules/atom-package-deps/lib/helpers.js",
+        "node_modules/atom-package-deps/lib/index.js",
+        "node_modules/atom-package-deps/lib/view.js",
+        "node_modules/atom-package-deps/node_modules/atom-package-path/lib/index.js",
+        "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/lib/main.js",
+        "node_modules/json-lint/demo/jquery-1.4.2.js",
+        "node_modules/json-lint/demo/jquery-linedtextarea.js",
+        "node_modules/json-lint/demo/js.js",
+        "node_modules/json-lint/jsonlint.js"
+      ],
+      ".json": [
+        "node_modules/atom-package-deps/node_modules/atom-package-path/node_modules/sb-callsite/package.json",
+        "node_modules/atom-package-deps/node_modules/atom-package-path/package.json",
+        "node_modules/atom-package-deps/package.json",
+        "node_modules/json-lint/package.json",
+        "package.json"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "lib",
+          "",
+          "spec/files",
+          "spec"
+        ],
+        "dependencies": {
+          "atom-package-deps": "^4.0.1",
+          "json-lint": "^0.1.0 "
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-package-deps/lib",
+          "node_modules/atom-package-deps"
+        ],
+        "dependencies": {
+          "atom-package-path": "^1.1.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules/atom-package-deps/node_modules/atom-package-path/lib",
+          "node_modules/atom-package-deps/node_modules/atom-package-path",
+          "node_modules/atom-package-deps/node_modules/atom-package-path/spec"
+        ],
+        "dependencies": {
+          "sb-callsite": "^1.1.2"
+        }
+      }
+    ]
+  }
+}
