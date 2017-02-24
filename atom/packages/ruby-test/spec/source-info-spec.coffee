@@ -95,6 +95,35 @@ describe "SourceInfo", ->
             """
         expect(sourceInfo.testFramework()).toBe("rspec")
 
+      it "selects RSpec for spec file if spec_helper is required with require_relative", ->
+        withSetup
+          config: "ruby-test.specFramework": ""
+          projectPaths: ['/home/user/project_1']
+          testFile: '/home/user/project_1/bar/foo_spec.rb'
+          currentLine: 2
+          fileContent:
+            """
+            require_relative '../spec_helper'
+
+            """
+        expect(sourceInfo.testFramework()).toBe("rspec")
+
+      it "selects RSpec for spec file if expect() is called", ->
+        withSetup
+          config: "ruby-test.specFramework": ""
+          projectPaths: ['/home/user/project_1']
+          testFile: '/home/user/project_1/bar/foo_spec.rb'
+          currentLine: 5
+          fileContent:
+            """
+            describe "something" do
+              it "test something" do
+                expect('foo').to eq 'foo'
+              end
+            end
+            """
+        expect(sourceInfo.testFramework()).toBe("rspec")
+
     describe "Minitest detection", ->
       it "is Minitest if filename matches _test.rb, and file contains specs", ->
         withSetup
@@ -206,51 +235,6 @@ describe "SourceInfo", ->
 
       expect(sourceInfo.projectType()).toBe("cucumber")
 
-  describe "::testAllCommand", ->
-    it "is the atom config for 'ruby-test.testAllCommand'", ->
-      withSetup
-        config: "ruby-test.testAllCommand": "my_ruby -I test test"
-        projectPaths: ['/home/user/project_1']
-        testFile: null
-        mockPaths: ['/home/user/project_1/test']
-
-      expect(sourceInfo.testAllCommand()).toBe("my_ruby -I test test")
-
-  describe "::rspecAllCommand", ->
-    it "is the atom config for 'ruby-test.rspecAllCommand' if spec directory exists", ->
-      withSetup
-        config: "ruby-test.rspecAllCommand": "my_rspec spec"
-        projectPaths: ['/home/user/project_1']
-        testFile: null
-        mockPaths: ['/home/user/project_1/spec']
-
-      expect(sourceInfo.testAllCommand()).toBe("my_rspec spec")
-
-  describe "::rspecFileCommand", ->
-    it "is the atom config for 'ruby-test.rspecFileCommand' if active file is _spec.rb and spec framework is rspec", ->
-      withSetup
-        config:
-          "ruby-test.specFramework": "rspec"
-          "ruby-test.rspecFileCommand": "my_rspec --tty {relative_path}"
-        projectPaths: ['/home/user/project_1']
-        testFile: '/home/user/project_1/bar/foo_spec.rb'
-        currentLine: 1
-        fileContent: ''
-
-      expect(sourceInfo.testFileCommand()).toBe("my_rspec --tty {relative_path}")
-
-  describe "::testSingleCommand", ->
-    it "is the atom config for 'ruby-test.testSingleCommand' if active file is _test.rb and test framework is test", ->
-      withSetup
-        config:
-          "ruby-test.testFramework": "test"
-          "ruby-test.testSingleCommand": "my_ruby -I test {relative_path}:{line_number}"
-        projectPaths: ['/home/user/project_1']
-        testFile: '/home/user/project_1/bar/foo_test.rb'
-        currentLine: 1
-        fileContent: ''
-      expect(sourceInfo.testSingleCommand()).toBe("my_ruby -I test {relative_path}:{line_number}")
-
   describe "::activeFile", ->
     it "is the project-relative path for the current file path", ->
       withSetup
@@ -295,10 +279,3 @@ describe "SourceInfo", ->
     it "should return empty string if no match", ->
       sourceInfo = new SourceInfo()
       expect(sourceInfo.extractMinitestRegExp("test something", "spec")).toBe("")
-
-  describe "::currentShell", ->
-    it "when ruby-test.shell is null", ->
-      withSetup
-        config: "ruby-test.shell": "my_bash"
-
-      expect(sourceInfo.currentShell()).toBe('my_bash')

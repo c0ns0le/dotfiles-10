@@ -1,5 +1,7 @@
 'use strict';
 
+const os = require('os');
+const http = require('http');
 const path = require('path');
 const child_process = require('child_process');
 const {CompositeDisposable} = require('atom');
@@ -7,6 +9,7 @@ const {CompositeDisposable} = require('atom');
 const {AccountManager, StateController, utils: kiteUtils} = require('kite-installer');
 const {findClosestGitRepo} = kiteUtils;
 
+const localconfig = require('./localconfig.js');
 const utils = require('./utils.js');
 const metrics = require('./metrics.js');
 const Login = require('./elements/login.js');
@@ -68,9 +71,38 @@ var Ready = {
     }));
 
     setTimeout(() => this.ensure());
-    this.statusItem.onClick(() => this.ensure());
+    this.statusItem.onClick(() => this.ensure(true));
 
     return subscriptions;
+  },
+
+  // saveUserID requests the current user's ID and saves it to localconfig.
+  // It does nothing if the current user is not authenticated or if there
+  // was an error fetching and parsing the user's info.
+  saveUserID: function() {
+    var req = http.request({
+      host: '127.0.0.1',
+      port: '46624',
+      path: '/clientapi/user',
+      method: 'GET',
+    }, (resp) => {
+      if (resp.statusCode !== 200) {
+        return;
+      }
+      var raw = '';
+      resp.on('data', (chunk) => raw += chunk);
+      resp.on('end', () => {
+        try {
+          var data = JSON.parse(raw);
+          if (data.id !== undefined) {
+            localconfig.set('distinctID', data.id);
+          }
+        } catch (err) {
+          console.error('error parsing user ID', err);
+        }
+      });
+    });
+    req.end();
   },
 
   // ensure checks that Kite is installed, running, reachable, authenticated,
@@ -121,14 +153,18 @@ var Ready = {
           } else if (forceNotify) {
             this.notifyReady();
           }
+          this.saveUserID();
           break;
         case StateController.STATES.WHITELISTED:
           metrics.track('kite is ready');
           if (forceNotify) {
             this.notifyReady();
           }
+          this.saveUserID();
           break;
       }
+
+      this.lastState = state;
     }, (err) => {
       metrics.track('handleState failed', err);
     });
@@ -167,7 +203,13 @@ var Ready = {
   // failure detected by ensure
   shouldNotify: function(state) {
     var prev = this.lastRejected[state];
-    return prev === undefined || utils.secondsSince(prev) >= NOTIFY_DELAY;
+    return state !== this.lastState &&
+           this.hasPythonFileOpen() &&
+           (prev === undefined || utils.secondsSince(prev) >= NOTIFY_DELAY);
+  },
+
+  hasPythonFileOpen: function() {
+    return atom.workspace.getTextEditors().some(e => /\.py$/.test(e.getPath() || ''));
   },
 
   warnNotSupported: function() {
@@ -215,7 +257,7 @@ var Ready = {
 
   install: function() {
     metrics.track('download-and-install started');
-    StateController.downloadKiteRelease().then(() => {
+    StateController.downloadKiteRelease({ install: true }).then(() => {
       metrics.track('download-and-install succeeded');
       this.launch();
     }, (err) => {
@@ -445,28 +487,58 @@ var Ready = {
   warnNotWhitelisted: function(filepath) {
     var dir = path.dirname(filepath);
     var suggested =  findClosestGitRepo(dir) || dir;
-    var metricsInfo = {dir: dir, suggested: suggested};
-    metrics.track('not-whitelisted warning shown', metricsInfo);
+    var root = path.relative(os.homedir(), dir).indexOf('..') === 0
+      ? '/'
+      : os.homedir();
+    metrics.track('not-whitelisted warning shown', {dir,
+      suggested, root});
 
     var rejected = true;
     var notification = atom.notifications.addWarning(
       'The Kite autocomplete engine is disabled for ' + path.basename(filepath), {
-        description: 'Would you like to enable Kite for Python files in ' + suggested + '?',
+        description: 'Would you like to enable Kite for Python files in:',
         icon: 'circle-slash',
         dismissable: true,
-        buttons: [{
-          text: 'Enable',
+        buttons: [/*{
+          text: suggested,
+          className: 'block',
           onDidClick: () => {
             rejected = false;  // so that onDidDismiss knows that this was not a reject
-            metrics.track('enable button clicked (via not-whitelisted warning)', metricsInfo);
+            metrics.track('enable button clicked (via not-whitelisted warning)', {dir, suggested});
             notification.dismiss();
             this.whitelist(suggested);
           },
-        }],
+          }, */{
+            text: root,
+            className: 'block',
+            onDidClick: () => {
+              rejected = false;  // so that onDidDismiss knows that this was not a reject
+              metrics.track('enable root button clicked (via not-whitelisted warning)', {dir, root});
+              notification.dismiss();
+              this.whitelist(root);
+            },
+          }, {
+            text: 'Browse...',
+            className: 'block',
+            onDidClick: () => {
+              rejected = false;  // so that onDidDismiss knows that this was not a reject
+              metrics.track('pick directory button clicked (via not-whitelisted warning)', {dir});
+              atom.applicationDelegate.pickFolder(([p]) => {
+                if (p) {
+                  metrics.track('directory picked (via not-whitelisted warning)', {dir: p});
+                  notification.dismiss();
+                  this.whitelist(p);
+                } else {
+                  metrics.track('directory pick cancelled (via not-whitelisted warning)', {dir});
+                }
+              });
+            },
+          }],
       });
     notification.onDidDismiss(() => {
       if (rejected) {
-        metrics.track('not-whitelisted warning dismissed', metricsInfo);
+        metrics.track('not-whitelisted warning dismissed', {dir,
+          suggested, root});
         this.lastRejected[StateController.STATES.AUTHENTICATED] = new Date();
       }
     });
@@ -483,7 +555,7 @@ var Ready = {
       // if whitelist failed because dir is already whitelisted then ignore
       var curState = err.data || 0;
       if (curState >= StateController.STATES.WHITELISTED) {
-        console.log('whitelist failed because dir is already whitelisted (state ${ curState })');
+        console.log(`whitelist failed because dir is already whitelisted (state ${ curState })`);
         return;
       }
 

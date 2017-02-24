@@ -15,9 +15,6 @@ module.exports =
       unit: /def\s(.*?)$/
       spec: /(?:"|')(.*?)(?:"|')/
 
-    currentShell: ->
-      atom.config.get('ruby-test.shell') || 'bash'
-
     projectPath: ->
       defaultPath = atom.project.getPaths()[0]
       if @filePath()
@@ -27,16 +24,6 @@ module.exports =
         return defaultPath
       else
         defaultPath
-
-    testFileCommand: ->
-      atom.config.get("ruby-test.#{@testFramework()}FileCommand")
-
-    testAllCommand: ->
-      configName = "ruby-test.#{@testFramework()}AllCommand"
-      atom.config.get("ruby-test.#{@testFramework()}AllCommand")
-
-    testSingleCommand: ->
-      atom.config.get("ruby-test.#{@testFramework()}SingleCommand")
 
     activeFile: ->
       @_activeFile ||= (fp = @filePath()) and atom.project.relativize(fp)
@@ -82,7 +69,8 @@ module.exports =
       editor = atom.workspace.getActiveTextEditor()
       i = @currentLine() - 1
       specRegExp = new RegExp(/\b(?:should|test|it)\s+['"](.*)['"]\s+do\b/)
-      rspecRequireRegExp = new RegExp(/^require(\s+)['"](rails|spec)_helper['"]$/)
+      rspecRequireRegExp = new RegExp(/^require.*(rails|spec)_helper/)
+      rspecAssertionRegExp = new RegExp(/^\s*expect\(/)
       minitestClassRegExp = new RegExp(/class\s(.*)<(\s?|\s+)Minitest::Test/)
       minitestMethodRegExp = new RegExp(/^(\s+)def\s(.*)$/)
       while i >= 0
@@ -101,7 +89,12 @@ module.exports =
             @_fileAnalysis.testHeaderLine = sourceLine
 
         # if it is spec and has require spec_helper which means it is rspec spec
-        else if rspecRequireRegExp.test(sourceLine)
+        if rspecRequireRegExp.test(sourceLine)
+          @_fileAnalysis.testStyle = 'spec'
+          @_fileAnalysis.framework = 'rspec'
+          break
+
+        else if rspecAssertionRegExp.test(sourceLine)
           @_fileAnalysis.testStyle = 'spec'
           @_fileAnalysis.framework = 'rspec'
           break

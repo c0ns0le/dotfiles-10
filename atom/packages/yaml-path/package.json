@@ -1,19 +1,43 @@
 {
-  "name": "yaml-path",
-  "main": "./lib/yaml-path",
-  "version": "0.1.0",
-  "description": "Show current position in YAML",
-  "keywords": [
-    "yaml",
-    "statusbar"
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10452-9odwbx/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10452-9odwbx/package.tgz",
+        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10452-9odwbx/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117030-10452-p31fm0"
+    ]
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/smarmie/yaml-path.git"
+  "_from": "../d-117030-10452-9odwbx/package.tgz",
+  "_id": "yaml-path@0.1.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/yaml-path",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10452-9odwbx/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10452-9odwbx/package.tgz",
+    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10452-9odwbx/package.tgz",
+    "type": "local"
   },
-  "license": "MIT",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-117030-10452-9odwbx/package.tgz",
+  "_shasum": "ff2eb08544d4df23af2247e5457cfd3613c4b23f",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10452-9odwbx/package.tgz",
+  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117030-10452-p31fm0",
+  "bugs": {
+    "url": "https://github.com/smarmie/yaml-path/issues"
   },
   "consumedServices": {
     "status-bar": {
@@ -30,90 +54,25 @@
   "dependencies": {
     "atom-linter": "^3.2.0"
   },
-  "readme": "When editing long/wide YAML files, you can use this to see the YAML namespace that you are currently in.\nIt only works when the grammar is YAML and refreshes every 100ms.\n\nActivate with CTRL+ALT+Y\n\nDisclaimer: I had no idea what I was doing when I was writing this, it's the first time I ever saw CoffeeScript/JavaScript. So any bugs/features might get ignored. Shameless rip of the status-bar-clock package.\n\nTODO: subscribe to event, such as grammar change or cursor move.\n",
-  "readmeFilename": "README.md",
-  "bugs": {
-    "url": "https://github.com/smarmie/yaml-path/issues"
+  "description": "Show current position in YAML",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
   },
   "homepage": "https://github.com/smarmie/yaml-path#readme",
-  "_id": "yaml-path@0.1.0",
-  "_shasum": "c0f58d69d7cd46e6276b17af2ca25e6c3bc8fb48",
-  "_resolved": "file:../d-116321-45576-9vt4ep/package.tgz",
-  "_from": "../d-116321-45576-9vt4ep/package.tgz",
-  "_atomModuleCache": {
-    "version": 1,
-    "dependencies": [
-      {
-        "name": "atom-linter",
-        "version": "3.4.1",
-        "path": "node_modules/atom-linter/lib/helpers.js"
-      },
-      {
-        "name": "tmp",
-        "version": "0.0.28",
-        "path": "node_modules/atom-linter/node_modules/tmp/lib/tmp.js"
-      },
-      {
-        "name": "os-tmpdir",
-        "version": "1.0.1",
-        "path": "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/index.js"
-      },
-      {
-        "name": "xregexp",
-        "version": "2.0.0",
-        "path": "node_modules/atom-linter/node_modules/xregexp/xregexp-all.js"
-      }
-    ],
-    "extensions": {
-      ".coffee": [
-        "lib/yaml-path-view.coffee",
-        "lib/yaml-path.coffee"
-      ],
-      ".js": [
-        "node_modules/atom-linter/lib/helpers.js",
-        "node_modules/atom-linter/node_modules/tmp/Gruntfile.js",
-        "node_modules/atom-linter/node_modules/tmp/lib/tmp.js",
-        "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/index.js",
-        "node_modules/atom-linter/node_modules/xregexp/xregexp-all.js"
-      ],
-      ".json": [
-        "node_modules/atom-linter/node_modules/tmp/node_modules/os-tmpdir/package.json",
-        "node_modules/atom-linter/node_modules/tmp/package.json",
-        "node_modules/atom-linter/node_modules/xregexp/package.json",
-        "node_modules/atom-linter/package.json",
-        "package.json"
-      ]
-    },
-    "folders": [
-      {
-        "paths": [
-          "lib",
-          ""
-        ],
-        "dependencies": {
-          "atom-linter": "^3.2.0"
-        }
-      },
-      {
-        "paths": [
-          "node_modules/atom-linter/lib",
-          "node_modules/atom-linter"
-        ],
-        "dependencies": {
-          "xregexp": "^2.0.0"
-        }
-      },
-      {
-        "paths": [
-          "node_modules/atom-linter/node_modules/tmp",
-          "node_modules/atom-linter/node_modules/tmp/lib",
-          "node_modules/atom-linter/node_modules/tmp/test",
-          "node_modules/atom-linter/node_modules/tmp/test/symlinkme"
-        ],
-        "dependencies": {
-          "os-tmpdir": "~1.0.1"
-        }
-      }
-    ]
-  }
+  "keywords": [
+    "yaml",
+    "statusbar"
+  ],
+  "license": "MIT",
+  "main": "./lib/yaml-path",
+  "name": "yaml-path",
+  "optionalDependencies": {},
+  "readme": "When editing long/wide YAML files, you can use this to see the YAML namespace that you are currently in.\nIt only works when the grammar is YAML and refreshes every 100ms.\n\nActivate with CTRL+ALT+Y\n\nDisclaimer: I had no idea what I was doing when I was writing this, it's the first time I ever saw CoffeeScript/JavaScript. So any bugs/features might get ignored. Shameless rip of the status-bar-clock package.\n\nTODO: subscribe to event, such as grammar change or cursor move.\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smarmie/yaml-path.git"
+  },
+  "version": "0.1.1"
 }

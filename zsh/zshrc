@@ -1,46 +1,44 @@
-# Antigen
-source ${0%/*}/../antigen/antigen.zsh
+# Antibody
+source <(antibody init)
 
 # Prompt
-antigen bundle nojhan/liquidprompt
+antibody bundle nojhan/liquidprompt
 
 ## Lib files
-antigen bundle robbyrussell/oh-my-zsh lib/
+#antibody bundle robbyrussell/oh-my-zsh lib/
 
 ## Basic Bundles
-antigen bundle djui/alias-tips
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle git
-antigen bundle common-aliases
-antigen bundle github
-antigen bundle caarlos0/zsh-open-pr
-antigen bundle adb
-antigen bundle rupa/z
-antigen bundle supercrabtree/k
-antigen bundle s7anley/zsh-geeknote
-antigen bundle tarruda/zsh-autosuggestions
-antigen bundle history
-antigen bundle vi-mode
-antigen bundle chrissicool/zsh-256color
-antigen bundle horosgrisa/autoenv
-antigen bundle https://github.com/zsh-users/zsh-history-substring-search
-antigen bundle zsh-users/zsh-completions src
-antigen bundle tmux
-antigen bundle tmuxinator
+antibody bundle djui/alias-tips
+antibody bundle zsh-users/zsh-syntax-highlighting
+antibody bundle paraqles/zsh-plugin-git
+#antibody bundle common-aliases
+#antibody bundle github
+antibody bundle caarlos0/zsh-open-pr
+#antibody bundle adb
+antibody bundle rupa/z
+antibody bundle supercrabtree/k
+antibody bundle s7anley/zsh-geeknote
+antibody bundle zsh-users/zsh-autosuggestions
+#antibody bundle history
+#antibody bundle vi-mode
+antibody bundle chrissicool/zsh-256color
+antibody bundle horosgrisa/autoenv
+antibody bundle https://github.com/zsh-users/zsh-history-substring-search
+antibody bundle zsh-users/zsh-completions
+#antibody bundle tmux
+#antibody bundle tmuxinator
 
 ## Ruby Bundles
-antigen bundle ruby
-antigen bundle gem
-antigen bundle rbenv
-antigen bundle bundler
+antibody bundle paraqles/zsh-plugin-ruby
+#antibody bundle rbenv
 
-antigen bundle pelletiermaxime/test-kitchen-zsh-plugin
+antibody bundle pelletiermaxime/test-kitchen-zsh-plugin
 
 ## OS specific plugins
 if [[ $CURRENT_OS == 'OS X' ]]; then
-    antigen bundle brew
-    antigen bundle brew-cask
-    antigen bundle osx
+    antibody bundle paraqles/zsh-plugin-mac
+    #antibody bundle brew
+    #antibody bundle brew-cask
 elif [[ $CURRENT_OS == 'Linux' ]]; then
     # None so far...
 
@@ -50,7 +48,7 @@ elif [[ $CURRENT_OS == 'Linux' ]]; then
 fi
 
 ## Antigen apply
-antigen apply
+#antibody apply
 
 # Basic settings
 export PATH="/usr/local/sbin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin:$ADB_HOME:$PATH"
@@ -66,7 +64,7 @@ export APK_HOME="$DOWNLOAD_HOME/APKs"
 
 # online help
 autoload run-help
-HELPDIR=/usr/local/share/zsh/help 
+HELPDIR=/usr/local/share/zsh/help
 
 # ATOM
 export ATOM_HOME=${0%/*}/../atom
@@ -75,4 +73,5 @@ export ATOM_HOME=${0%/*}/../atom
 alias fuck='$(thefuck $(fc -ln -1))'
 
 # RbEnv init
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

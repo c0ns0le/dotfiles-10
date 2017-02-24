@@ -2,44 +2,44 @@
   "_args": [
     [
       {
-        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-27001-g5o987/package.tgz",
+        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10439-1h5w8n0/package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-27001-g5o987/package.tgz",
-        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-27001-g5o987/package.tgz",
+        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10439-1h5w8n0/package.tgz",
+        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10439-1h5w8n0/package.tgz",
         "type": "local"
       },
-      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-1161112-27001-ppq1p7"
+      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117030-10439-1ubhc9z"
     ]
   ],
-  "_from": "../d-1161112-27001-g5o987/package.tgz",
-  "_id": "linter-rubocop@0.5.2",
+  "_from": "../d-117030-10439-1h5w8n0/package.tgz",
+  "_id": "linter-rubocop@0.5.3",
   "_inCache": true,
   "_installable": true,
   "_location": "/linter-rubocop",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-27001-g5o987/package.tgz",
+    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10439-1h5w8n0/package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-27001-g5o987/package.tgz",
-    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-27001-g5o987/package.tgz",
+    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10439-1h5w8n0/package.tgz",
+    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10439-1h5w8n0/package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:../d-1161112-27001-g5o987/package.tgz",
-  "_shasum": "223340a7fa060414f2d43a4a730e7cb7ab1f2ed5",
+  "_resolved": "file:../d-117030-10439-1h5w8n0/package.tgz",
+  "_shasum": "7cf2f2cb60580332e1e5552df39b8a7a2a06c875",
   "_shrinkwrap": null,
-  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-27001-g5o987/package.tgz",
-  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-1161112-27001-ppq1p7",
+  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10439-1h5w8n0/package.tgz",
+  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117030-10439-1ubhc9z",
   "activationHooks": [
     "language-ruby:grammar-used",
     "language-ruby-on-rails:grammar-used",
-    "language-chec:grammar-used"
+    "language-chef:grammar-used"
   ],
   "bugs": {
     "url": "https://github.com/AtomLinter/linter-rubocop/issues"
@@ -227,5 +227,5 @@
     "lint": "coffeelint lib && eslint .",
     "test": "apm test"
   },
-  "version": "0.5.2"
+  "version": "0.5.3"
 }
