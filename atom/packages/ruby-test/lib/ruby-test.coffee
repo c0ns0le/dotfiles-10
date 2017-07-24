@@ -13,7 +13,7 @@ module.exports =
     minitestSingleCommand:
       title: "Minitest command: Run current test"
       type: 'string'
-      default: "ruby {relative_path} -n \"/{regex}/\""
+      default: "ruby -I test {relative_path} -n \"/{regex}/\""
     testAllCommand:
       title: "Ruby Test command: Run all tests"
       type: 'string'
@@ -50,9 +50,6 @@ module.exports =
       title: "Cucumber command: Run features at current line"
       type: 'string',
       default: "cucumber --color {relative_path}:{line_number}"
-    shell:
-      type: 'string',
-      default: "bash"
     specFramework:
       type: 'string'
       default: ''

@@ -4,6 +4,7 @@ import path from 'path'
 import {CompositeDisposable, Point} from 'atom'
 import GodocPanel from './godoc-panel'
 import {isValidEditor} from '../utils'
+import {buildGuruArchive} from '../guru-utils'
 import os from 'os'
 
 class Godoc {
@@ -34,14 +35,7 @@ class Godoc {
       const offset = this.editorByteOffset(editor)
 
       // package up unsaved buffers in the Guru archive format
-      let archive = ''
-      for (const e of atom.workspace.getTextEditors()) {
-        if (e.isModified() && isValidEditor(e)) {
-          archive += e.getTitle() + '\n'
-          archive += Buffer.byteLength(e.getText(), 'utf8') + '\n'
-          archive += e.getText()
-        }
-      }
+      const archive = buildGuruArchive()
       return this.getDoc(file, offset, cwd, cmd, archive)
     })
   }
@@ -80,7 +74,7 @@ class Godoc {
       args.push('-modified')
       options.input = stdin
     }
-    this.panelModel.updateContent('Generating documentation...')
+    this.panelModel.updateMessage('Generating documentation...')
     return this.goconfig.executor.exec(cmd, args, options).then((r) => {
       if (r.error) {
         if (r.error.code === 'ENOENT') {
@@ -94,8 +88,15 @@ class Godoc {
             dismissable: true
           })
         }
+
         return {success: false, result: r}
       }
+
+      if (r.exitcode !== 0 || (r.stderr && r.stderr.trim() !== '')) {
+        this.panelModel.updateMessage(r.stdout.trim() + os.EOL + r.stderr.trim())
+        return {success: false, result: r}
+      }
+
       const doc = JSON.parse(r.stdout.trim())
       if (doc) {
         if (doc.decl.startsWith('package')) {
@@ -115,11 +116,6 @@ class Godoc {
           }
         }
         this.panelModel.updateContent(doc)
-      }
-
-      if (r.exitcode !== 0 || r.stderr && r.stderr.trim() !== '') {
-        // TODO: notification?
-        return {success: false, result: r}
       }
 
       return {success: true, result: r, doc: doc}

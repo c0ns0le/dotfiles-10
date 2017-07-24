@@ -1,6 +1,7 @@
 $ = require('jquery')
 TableParser = require('table-parser')
 exec = require('child_process').exec
+os = require('os')
 String.prototype.replaceAll = (s, r) -> @split(s).join(r)
 
 module.exports =
@@ -59,7 +60,9 @@ class RsenseClient
       (error, stdout, stderr) ->
         if error != null
           atom.notifications.addError('Error starting rsense',
-              {detail: "autocomplete-ruby: exec error: #{error}", dismissable: true}
+              {detail: "autocomplete-ruby: exec error: #{error}#{os.EOL}" +
+              "(You might need to set the rsense path, see the readme)",
+              dismissable: true}
             )
         else
           @rsenseStarted = true
@@ -83,7 +86,11 @@ class RsenseClient
             process.CMD.join(' ').match( /--type=renderer.*--node-integration=true/ )
           )
           if @atomProcesses.length < 2
-            process.kill(@rsenseProcess.PID[0], 'SIGKILL') if @rsenseProcess
+            try
+              process.kill(@rsenseProcess.PID[0], 'SIGKILL') if @rsenseProcess
+            catch ex
+              # ignore error if kill fails
+              console.debug "exception killing process: #{ex}"
             stopCommand()
     )
 

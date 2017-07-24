@@ -2,46 +2,46 @@
   "_args": [
     [
       {
-        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-26986-1nat6lz/package.tgz",
+        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11737-23924-1lriiuk/package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-26986-1nat6lz/package.tgz",
-        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-26986-1nat6lz/package.tgz",
+        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11737-23924-1lriiuk/package.tgz",
+        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11737-23924-1lriiuk/package.tgz",
         "type": "local"
       },
-      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-1161112-26986-fzvobo"
+      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-11737-23924-tq5qeh"
     ]
   ],
-  "_from": "../d-1161112-26986-1nat6lz/package.tgz",
-  "_id": "linter-docker@0.1.4",
+  "_from": "../d-11737-23924-1lriiuk/package.tgz",
+  "_id": "linter-docker@0.2.0",
   "_inCache": true,
   "_installable": true,
   "_location": "/linter-docker",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-26986-1nat6lz/package.tgz",
+    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11737-23924-1lriiuk/package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-26986-1nat6lz/package.tgz",
-    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-26986-1nat6lz/package.tgz",
+    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11737-23924-1lriiuk/package.tgz",
+    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11737-23924-1lriiuk/package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:../d-1161112-26986-1nat6lz/package.tgz",
-  "_shasum": "1d72f6ce16ea688566476819b63766f904891394",
+  "_resolved": "file:../d-11737-23924-1lriiuk/package.tgz",
+  "_shasum": "6c98f4df736dbbb8e2321ec7933ddce043bbfe3a",
   "_shrinkwrap": null,
-  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-1161112-26986-1nat6lz/package.tgz",
-  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-1161112-26986-fzvobo",
+  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11737-23924-1lriiuk/package.tgz",
+  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-11737-23924-tq5qeh",
   "bugs": {
     "url": "https://github.com/AtomLinter/linter-docker/issues"
   },
   "dependencies": {
-    "atom-linter": "^8.0.0",
-    "dockerlint": "~0.2.0"
+    "atom-linter": "^9.0.0",
+    "dockerlint": "~0.3.1"
   },
   "description": "Linter plugin for Dockerfile's, using dockerlint",
   "devDependencies": {},
@@ -66,5 +66,5 @@
     "type": "git",
     "url": "git+https://github.com/AtomLinter/linter-docker.git"
   },
-  "version": "0.1.4"
+  "version": "0.2.0"
 }

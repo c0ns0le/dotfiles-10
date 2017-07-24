@@ -2,18 +2,17 @@
 /* eslint-env jasmine */
 
 import path from 'path'
-import fs from 'fs-plus'
+import fs from 'fs-extra'
 import {lifecycle} from './../spec-helpers'
 
 describe('tester', () => {
-  let mainModule = null
   let gopath = null
   let tester = null
 
   beforeEach(() => {
     runs(() => {
       lifecycle.setup()
-      atom.packages.triggerDeferredActivationHooks()
+
       atom.config.set('go-plus.format.formatOnSave', false)
       atom.config.set('go-plus.test.coverageHighlightMode', 'covered-and-uncovered')
       gopath = lifecycle.temp.mkdirSync()
@@ -21,24 +20,18 @@ describe('tester', () => {
       atom.project.setPaths([gopath])
     })
 
+    waitsForPromise(() => {
+      return lifecycle.activatePackage()
+    })
+
     runs(() => {
-      let pack = atom.packages.loadPackage('go-plus')
-      pack.activateNow()
-      atom.packages.triggerActivationHook('core:loaded-shell-environment')
-      atom.packages.triggerActivationHook('language-go:grammar-used')
-      mainModule = pack.mainModule
+      const { mainModule } = lifecycle
       mainModule.loadTester()
       tester = mainModule.tester
     })
 
-    waitsFor(() => { return mainModule && mainModule.loaded })
-
-    waitsForPromise(() => {
-      return atom.packages.activatePackage('language-go')
-    })
-
     waitsFor(() => {
-      return mainModule.provideGoConfig() !== false
+      return lifecycle.mainModule.provideGoConfig() !== false
     })
   })
 
@@ -56,6 +49,8 @@ describe('tester', () => {
       atom.config.set('go-plus.test.runTestsOnSave', false)
       filePath = path.join(gopath, 'src', 'github.com', 'testuser', 'example', 'go-plus.go')
       testFilePath = path.join(gopath, 'src', 'github.com', 'testuser', 'example', 'go-plus_test.go')
+      fs.ensureDirSync(path.dirname(filePath))
+      fs.ensureDirSync(path.dirname(testFilePath))
       fs.writeFileSync(filePath, '')
       fs.writeFileSync(testFilePath, '')
       waitsForPromise(() => {
@@ -112,46 +107,6 @@ describe('tester', () => {
         expect(range.end.row).toBe(6)
         expect(range.end.column).toBe(1)
       })
-
-      p = tester.runTests(editor)
-
-      waitsForPromise(() => { return p })
-
-      runs(() => {
-        let layerids = tester.markedEditors.get(editor.id).split(',')
-        let coveredLayer = editor.getMarkerLayer(layerids[0])
-        let uncoveredLayer = editor.getMarkerLayer(layerids[1])
-        expect(coveredLayer).toBeTruthy()
-        expect(uncoveredLayer).toBeTruthy()
-
-        let coveredmarkers = coveredLayer.getMarkers()
-        expect(coveredmarkers).toBeDefined()
-        expect(coveredmarkers.length).toBe(1)
-        expect(coveredmarkers[0]).toBeDefined()
-        let range = coveredmarkers[0].getBufferRange()
-        expect(range.start.row).toBe(8)
-        expect(range.start.column).toBe(20)
-        expect(range.end.row).toBe(10)
-        expect(range.end.column).toBe(1)
-
-        let uncoveredmarkers = uncoveredLayer.getMarkers()
-        expect(uncoveredmarkers).toBeDefined()
-        expect(uncoveredmarkers.length).toBe(1)
-        expect(uncoveredmarkers[0]).toBeDefined()
-        range = uncoveredmarkers[0].getBufferRange()
-        expect(range).toBeDefined()
-        expect(range.start.row).toBe(4)
-        expect(range.start.column).toBe(13)
-        expect(range.end.row).toBe(6)
-        expect(range.end.column).toBe(1)
-      })
-
-      expect(mainModule).toBeDefined()
-      expect(mainModule).toBeTruthy()
-      expect(mainModule.provideGoConfig).toBeDefined()
-      expect(mainModule.provideGoConfig()).toBeTruthy()
-      expect(mainModule.tester).toBeDefined()
-      expect(mainModule.tester).toBeTruthy()
     })
 
     it('clears coverage for go source', () => {

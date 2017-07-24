@@ -2,40 +2,40 @@
   "_args": [
     [
       {
-        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11694-21505-1ieukng/package.tgz",
+        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77901-dixojm.abufjbrzfr/package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11694-21505-1ieukng/package.tgz",
-        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11694-21505-1ieukng/package.tgz",
+        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77901-dixojm.abufjbrzfr/package.tgz",
+        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77901-dixojm.abufjbrzfr/package.tgz",
         "type": "local"
       },
-      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-11694-21505-1g0h3f7"
+      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-11759-77901-1u15ujs.yz2etawcdi"
     ]
   ],
-  "_from": "../d-11694-21505-1ieukng/package.tgz",
-  "_id": "language-dotfiles@1.0.0",
+  "_from": "../d-11759-77901-dixojm.abufjbrzfr/package.tgz",
+  "_id": "language-dotfiles@1.1.0",
   "_inCache": true,
   "_installable": true,
   "_location": "/language-dotfiles",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11694-21505-1ieukng/package.tgz",
+    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77901-dixojm.abufjbrzfr/package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11694-21505-1ieukng/package.tgz",
-    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11694-21505-1ieukng/package.tgz",
+    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77901-dixojm.abufjbrzfr/package.tgz",
+    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77901-dixojm.abufjbrzfr/package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:../d-11694-21505-1ieukng/package.tgz",
-  "_shasum": "f3721a079483ed7dfabebc41f2033f1fd48bc4e9",
+  "_resolved": "file:../d-11759-77901-dixojm.abufjbrzfr/package.tgz",
+  "_shasum": "ff6f87cc3796978d9a2725f2e9cb09db766ff43f",
   "_shrinkwrap": null,
-  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11694-21505-1ieukng/package.tgz",
-  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-11694-21505-1g0h3f7",
+  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77901-dixojm.abufjbrzfr/package.tgz",
+  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-11759-77901-1u15ujs.yz2etawcdi",
   "author": {
     "name": "Marc Görtz",
     "email": "git@marcgoertz.de",
@@ -53,6 +53,7 @@
   },
   "homepage": "https://atom.io/packages/language-dotfiles",
   "keywords": [
+    "atom",
     "dotfiles",
     "configuration",
     "grammar",
@@ -61,12 +62,12 @@
   "license": "MIT",
   "name": "language-dotfiles",
   "optionalDependencies": {},
-  "readme": "# Dotfiles Syntax Highlighting for Atom\n\nWant ShellScript (Bash) syntax highlighting for your dotfiles?\nYou’re damn right you do!\n\nBased on the\n[Dotfiles Syntax Highlighting Package](https://github.com/mattbanks/dotfiles-syntax-highlighting-st2)\nfor Sublime Text 2/3 by [@mattbanks](https://github.com/mattbanks) and contributors.\n\nContributions are greatly appreciated. Please fork this repository and open a\npull request to make grammar tweaks, etc.\n\n## Changelog\n\nCheck [changelog](https://github.com/Dreamseer/language-dotfiles/blob/master/CHANGELOG.md)\nfor more information.\n",
+  "readme": "# Dotfiles Syntax Highlighting for Atom\n\n[![apm](https://img.shields.io/apm/dm/language-dotfiles.svg?maxAge=2592000)](https://atom.io/packages/language-dotfiles)\n[![GitHub release](https://img.shields.io/github/release/dreamseer/language-dotfiles.svg?maxAge=2592000)](https://github.com/Dreamseer/language-dotfiles/releases)\n[![license](https://img.shields.io/github/license/dreamseer/language-dotfiles.svg?maxAge=2592000)](https://github.com/Dreamseer/language-dotfiles/blob/master/LICENSE.md)\n\nWant ShellScript (Bash) syntax highlighting for your dotfiles?\nYou’re damn right you do!\n\nBased on the\n[Dotfiles Syntax Highlighting Package](https://github.com/mattbanks/dotfiles-syntax-highlighting-st2)\nfor Sublime Text 2/3 by [@mattbanks](https://github.com/mattbanks) and contributors.\n\nContributions are greatly appreciated. Please fork this repository and open a\npull request to make grammar tweaks, etc.\n\n## Changelog\n\nCheck [changelog](https://github.com/Dreamseer/language-dotfiles/blob/master/CHANGELOG.md)\nfor more information.\n",
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Dreamseer/language-dotfiles.git"
   },
-  "title": "Dotfiles Syntax Highlighting",
-  "version": "1.0.0"
+  "title": "Dotfiles Syntax Highlighting for Atom",
+  "version": "1.1.0"
 }

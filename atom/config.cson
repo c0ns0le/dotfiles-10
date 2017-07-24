@@ -8,6 +8,7 @@
       "activate-power-mode"
       "linter-erb"
       "linter-shellcheck"
+      "linter-rails-best-practices"
     ]
     projectHome: "/Users/ali/code"
     telemetryConsent: "limited"
@@ -22,15 +23,16 @@
     softWrapAtPreferredLineLength: true
   "exception-reporting":
     userId: "d4efaa67-4ea3-de6f-ea14-09270d232311"
+  kite:
+    showKiteTourOnStatup: false
   linter:
-    errorPanelHeight: 542
     lintDebug: true
-    showErrorTabLine: true
     showInfoMessages: true
     statusBar: "Show all errors"
   "linter-erb":
     erbExecutablePath: "/usr/local/opt/rbenv/shims/erb"
     trimMode: "-"
+  "linter-ui-default": {}
   metrics:
     userId: "44edc941840c87dd1cf98a0d605a1fa48c3e1883"
   "python-autopep8": {}

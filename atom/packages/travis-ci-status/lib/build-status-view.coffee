@@ -84,7 +84,9 @@ class BuildStatusView extends View
           /(.)*github\.com/i.test(r.getConfigValue("remote.#{name}.url"))
 
       @repo = repo_list[0]
-      @repo.onDidChangeStatus(@update)
+
+      if @repo
+        @repo.onDidChangeStatus(@update)
 
   # Internal: Update the repository build status from Travis CI.
   #

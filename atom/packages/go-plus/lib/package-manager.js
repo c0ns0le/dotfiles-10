@@ -32,7 +32,8 @@ const goTools = new Map([
   ['gometalinter', 'github.com/alecthomas/gometalinter'],
   ['gogetdoc', 'github.com/zmb3/gogetdoc'],
   ['godef', 'github.com/rogpeppe/godef'],
-  ['guru', 'golang.org/x/tools/cmd/guru']
+  ['guru', 'golang.org/x/tools/cmd/guru'],
+  ['gomodifytags', 'github.com/fatih/gomodifytags']
 ])
 
 class PackageManager {
@@ -105,6 +106,7 @@ class PackageManager {
       for (const d of atom.config.get('go-plus.disabledBundledPackages')) {
         if (d && d.trim() === pkg) {
           disabled = true
+          break
         }
       }
       if (disabled) {

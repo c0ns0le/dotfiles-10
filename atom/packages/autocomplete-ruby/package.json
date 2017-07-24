@@ -2,40 +2,40 @@
   "_args": [
     [
       {
-        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10410-1tcxyk9/package.tgz",
+        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77848-a6oygl.4irepnwmi/package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10410-1tcxyk9/package.tgz",
-        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10410-1tcxyk9/package.tgz",
+        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77848-a6oygl.4irepnwmi/package.tgz",
+        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77848-a6oygl.4irepnwmi/package.tgz",
         "type": "local"
       },
-      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117030-10410-pz0zv5"
+      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-11759-77848-1h6xese.9puylm1jor"
     ]
   ],
-  "_from": "../d-117030-10410-1tcxyk9/package.tgz",
-  "_id": "autocomplete-ruby@0.2.5",
+  "_from": "../d-11759-77848-a6oygl.4irepnwmi/package.tgz",
+  "_id": "autocomplete-ruby@0.2.8",
   "_inCache": true,
   "_installable": true,
   "_location": "/autocomplete-ruby",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10410-1tcxyk9/package.tgz",
+    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77848-a6oygl.4irepnwmi/package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10410-1tcxyk9/package.tgz",
-    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10410-1tcxyk9/package.tgz",
+    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77848-a6oygl.4irepnwmi/package.tgz",
+    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77848-a6oygl.4irepnwmi/package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:../d-117030-10410-1tcxyk9/package.tgz",
-  "_shasum": "f59824d80a5b549801a3059d91d00383eae3a415",
+  "_resolved": "file:../d-11759-77848-a6oygl.4irepnwmi/package.tgz",
+  "_shasum": "5ff05a68792443feebbe059f3fd6fa31431d2f52",
   "_shrinkwrap": null,
-  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117030-10410-1tcxyk9/package.tgz",
-  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117030-10410-pz0zv5",
+  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11759-77848-a6oygl.4irepnwmi/package.tgz",
+  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-11759-77848-1h6xese.9puylm1jor",
   "author": {
     "name": "Ian Hattendorf",
     "email": "ianhattendorf@gmail.com",
@@ -72,11 +72,11 @@
       }
     }
   },
-  "readme": "# Atom Autocomplete+ Ruby Suggestions\n[![Dependency status](https://david-dm.org/ianhattendorf/autocomplete-ruby.svg)](https://david-dm.org/ianhattendorf/autocomplete-ruby)\n[![GitHub version](https://badge.fury.io/gh/ianhattendorf%2Fautocomplete-ruby.svg)](http://badge.fury.io/gh/ianhattendorf%2Fautocomplete-ruby)\n\nProvides intelligent code completion for Ruby. Requires [RSense](https://github.com/rsense/rsense) and [Autocomplete+](https://github.com/atom-community/autocomplete-plus).\n\n## Status\nCurrently pre-alpha, buggy and not fully implemented. All help is welcome.\n\n## Why?\nBecause I wanted Ruby code completion in Atom and [atom-rsense](https://github.com/rsense/atom-rsense) hasn't been updated since June 2014, which is a long time for an Atom package. It's currently broken and I didn't like the dependency on Opal, as much as I enjoy Ruby, so I decided to create this.\n\n## Installation\nMake sure you have Java installed on your machine.\n\nInstall required gems and Atom packages:\n```shell\n$ gem install rsense\n$ apm install autocomplete-plus (is preinstalled with Atom)\n```\n\nIf you need to set up the rsense path, execute `gem environment`: Then take the `EXECUTABLE DIRECTORY`, add `rsense` and put this into the rsense executable path.\n\n## Usage\nJust type some stuff, and autocomplete+ will automatically show you some suggestions.\n\nNote: If you use Winows, it might take about 10 seconds after the first suggestions pop up before rsense will give you any suggestions.\n\n## Bugs\nA lot. If you're brave enough to try this out and notice any specifically, feel free to open an issue or even better submit a pull request.\n\n## Development\nClone the repository into your working directory:\n```shell\n$ git clone git@github.com:ianhattendorf/autocomplete-ruby.git\n```\n\nInstall dependencies:\n```shell\n$ cd autocomplete-ruby\n$ apm install\n```\n\nLink to Atom as a dev package:\n```shell\n$ apm link --dev\n```\n\nFeel free to fork it and submit a pull request for any changes you make.\n",
+  "readme": "# Atom Autocomplete+ Ruby Suggestions\n[![Dependency status](https://david-dm.org/ianhattendorf/autocomplete-ruby.svg)](https://david-dm.org/ianhattendorf/autocomplete-ruby)\n[![GitHub version](https://badge.fury.io/gh/ianhattendorf%2Fautocomplete-ruby.svg)](http://badge.fury.io/gh/ianhattendorf%2Fautocomplete-ruby)\n\nProvides intelligent code completion for Ruby. Requires [RSense](https://github.com/rsense/rsense) and [Autocomplete+](https://github.com/atom-community/autocomplete-plus).\n\n## Status\nWorks for the most part, however **not on Windows**. This is due to a bug in [RSense](https://github.com/rsense/rsense), which is no longer being developed. Any bugs/issues related to rsense itself will need to be reported in that repo, and probably won't be fixed.\n\nPlease read the [Known Issues](#known-issues) before reporting any issues.\n\n## Why?\nBecause I wanted Ruby code completion in Atom and [atom-rsense](https://github.com/rsense/atom-rsense) is broken and hasn't been updated since June 2014.\n\n## Installation\nMake sure you have Java installed on your machine.\n\nInstall rsense:\n```shell\n$ gem install rsense\n```\n\nIf you get an error about not being able to find `rsense` after opening a ruby file, you will need to set the path to the rsense binary in the plugin settings. The path is different depending on which OS/Ruby environment manager you are using. Executing `which rsense` or `gem environment` might help you locate it.\n\n## Usage\nJust type some stuff, and autocomplete+ will automatically show you some suggestions.\n\nNote: If you use Winows, it might take about 10 seconds after the first suggestions pop up before rsense will give you any suggestions.\n\n## Known Issues\n- Sometimes the environment isn't configured correctly when launching Atom from it's launcher (any custom config in `.bashrc`, `.bash_profile`, etc.). If you have any issues with the plugin, please try launching atom from the terminal first: `$ atom`.\n- RSense doesn't appear to work on Windows.\n\nFeel free to report any other issues you encounter.\n\n## Development\nClone the repository into your working directory:\n```shell\n$ git clone git@github.com:ianhattendorf/autocomplete-ruby.git\n```\n\nInstall dependencies:\n```shell\n$ cd autocomplete-ruby\n$ apm install\n```\n\nLink to Atom as a dev package:\n```shell\n$ apm link --dev\n```\n\nFeel free to fork it and submit a pull request for any changes you make.\n",
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ianhattendorf/autocomplete-ruby.git"
   },
-  "version": "0.2.5"
+  "version": "0.2.8"
 }

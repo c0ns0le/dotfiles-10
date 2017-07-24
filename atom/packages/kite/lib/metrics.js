@@ -3,6 +3,7 @@
 var os = require('os');
 const mixpanel = require('mixpanel');
 const crypto = require('crypto');
+const {Logger} = require('kite-installer');
 const kitePkg = require('../package.json');
 const localconfig = require('./localconfig.js');
 
@@ -29,11 +30,8 @@ function distinctID() {
 
 // Send an event to mixpanel
 function track(eventName, properties) {
-  if (properties === undefined) {
-    console.log(`event: ${ eventName }`);
-  } else {
-    console.log(`event: ${ eventName }`, properties);
-  }
+  eventName = `atom - ${eventName}`;
+
   var eventData = {
     distinct_id: distinctID(),
     editor_uuid: EDITOR_UUID,
@@ -45,9 +43,16 @@ function track(eventName, properties) {
   for (var key in properties || {}) {
     eventData[key] = properties[key];
   }
+  if (atom.config.get('kite.debugMetrics')) {
+    console.debug('mixpanel:', eventName, eventData);
+  }
+  Logger.debug('mixpanel:', eventName, eventData);
   client.track(eventName, eventData);
 }
 
 module.exports = {
-  track: track,
+  track,
+  distinctID,
+  EDITOR_UUID,
+  OS_VERSION,
 };

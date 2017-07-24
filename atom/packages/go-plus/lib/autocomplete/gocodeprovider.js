@@ -61,7 +61,6 @@ class GocodeProvider {
     this.subscriptions = null
     this.goconfig = null
     this.subscribers = null
-    this.selector = null
     this.inclusionPriority = null
     this.excludeLowerPriority = null
     this.suppressForCharacters = null
@@ -74,7 +73,7 @@ class GocodeProvider {
   toggleGocodeConfig () {
     if (this.goconfig) {
       this.goconfig.locator.findTool('gocode').then((cmd) => {
-        if (!this.goconfig) {
+        if (!cmd) {
           return
         }
         this.goconfig.executor.exec(cmd, ['set', 'unimported-packages', this.unimportedPackages]).then((r) => {
@@ -152,13 +151,12 @@ class GocodeProvider {
 
       const index = buffer.characterIndexForPosition(options.bufferPosition)
       const priorBufferPosition = options.bufferPosition.copy()
-      priorBufferPosition.column
       if (priorBufferPosition.column > 0) {
         priorBufferPosition.column = priorBufferPosition.column - 1
       }
       const scopeDescriptor = options.editor.scopeDescriptorForBufferPosition(priorBufferPosition)
       const text = options.editor.getText()
-      if (index > 0 && this.characterIsSuppressed(text[index - 1], scopeDescriptor)) {
+      if (!options.activatedManually && index > 0 && this.characterIsSuppressed(text[index - 1], scopeDescriptor)) {
         return resolve()
       }
       const offset = Buffer.byteLength(text.substring(0, index), 'utf8')

@@ -1,5 +1,0 @@
-
-'.platform-darwin .kite-login-panel':
-  'cmd-c': 'native!'
-  'cmd-x': 'native!'
-  'cmd-v': 'native!'

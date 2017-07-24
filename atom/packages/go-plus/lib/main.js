@@ -7,15 +7,19 @@ export default {
   bootstrapped: null,
   builder: null,
   configservice: null,
+  orchestrator: null,
   formatter: null,
   getservice: null,
   godoc: null,
   gorename: null,
+  gomodifytags: null,
   loaded: null,
   panelManager: null,
   statusbar: null,
   subscriptions: null,
   tester: null,
+  usage: null,
+  what: null,
 
   activate () {
     this.subscriptions = new CompositeDisposable()
@@ -23,6 +27,11 @@ export default {
     this.validateAtomVersion()
     this.bootstrapped = false
     this.loaded = false
+
+    const Orchestrator = require('./orchestrator')
+    this.orchestrator = new Orchestrator()
+    this.subscriptions.add(this.orchestrator)
+
     const {Bootstrap} = require('./bootstrap')
     this.bootstrap = new Bootstrap(() => {
       this.bootstrapped = true
@@ -55,21 +64,37 @@ export default {
     this.autocompleteProvider = null
     this.godoc = null
     this.gorename = null
+    this.gomodifytags = null
     this.godef = null
     this.hyperclickProvider = null
+    this.usage = null
+    this.what = null
   },
 
   load () {
     this.getPanelManager()
+    this.loadOutput()
     this.loadInformation()
     this.loadFormatter()
+    this.loadBuilder()
     this.loadTester()
+    this.loadGometalinter()
     this.loadDoc()
+    this.loadUsage()
+    this.loadWhat()
+    this.loadImplements()
     this.loadGorename()
+    this.loadGoModifyTags()
     this.getGodef()
     if (!atom.config.get('go-plus.testing')) {
       this.loadPackageManager()
     }
+
+    this.subscriptions.add(this.orchestrator.register('format', (e) => { return this.formatter.handleWillSaveEvent(e) }, 'willSave'))
+    this.subscriptions.add(this.orchestrator.register('builder', (editor, path) => { return this.builder.build(editor, path) }))
+    this.subscriptions.add(this.orchestrator.register('tester', (editor, path) => { return this.tester.handleSaveEvent(editor, path) }))
+    this.subscriptions.add(this.orchestrator.register('linter', (editor, path) => { return this.linter.lint(editor, path) }))
+
     this.loaded = true
   },
 
@@ -116,28 +141,82 @@ export default {
     return this.godoc
   },
 
-  loadGuru () {
-    if (this.guru) {
-      return this.guru
+  loadImplements () {
+    if (this.implements) {
+      return this.implements
+    }
+    const Implements = require('./implements/implements')
+    this.implements = new Implements(this.provideGoConfig())
+    const ImplementsView = require('./implements/implements-view')
+    const view = this.consumeViewProvider({
+      view: ImplementsView,
+      model: this.implements
+    })
+    if (this.subscriptions) {
+      this.subscriptions.add(this.implements)
+      this.subscriptions.add(view)
+    }
+    return this.implements
+  },
+
+  loadUsage () {
+    if (this.usage) {
+      return this.usage
     }
 
     // Model
-    const {Guru} = require('./guru/guru')
-    this.guru = new Guru(this.provideGoConfig())
+    const {Usage} = require('./usage/usage')
+    this.usage = new Usage(this.provideGoConfig())
 
     // View
-    const GuruView = require('./doc/guru-view')
+    const UsageView = require('./usage/usage-view')
     const view = this.consumeViewProvider({
-      view: GuruView,
-      model: this.guru
+      view: UsageView,
+      model: this.usage
     })
 
     if (this.subscriptions) {
-      this.subscriptions.add(this.guru)
+      this.subscriptions.add(this.usage)
       this.subscriptions.add(view)
     }
 
-    return this.guru
+    return this.usage
+  },
+
+  loadWhat () {
+    if (this.what) {
+      return this.what
+    }
+
+    // Model
+    const {What} = require('./what/what')
+    this.what = new What(this.provideGoConfig())
+
+    if (this.subscriptions) {
+      this.subscriptions.add(this.what)
+    }
+
+    return this.what
+  },
+
+  loadOutput () {
+    if (this.outputManager) {
+      return this.outputManager
+    }
+    const OutputManager = require('./output-manager')
+    this.outputManager = new OutputManager()
+
+    const OutputPanel = require('./output-panel')
+    const view = this.consumeViewProvider({
+      view: OutputPanel,
+      model: this.outputManager
+    })
+
+    if (this.subscriptions) {
+      this.subscriptions.add(view)
+    }
+
+    return this.outputManager
   },
 
   loadFormatter () {
@@ -149,7 +228,6 @@ export default {
     if (this.subscriptions) {
       this.subscriptions.add(this.formatter)
     }
-
     return this.formatter
   },
 
@@ -157,27 +235,15 @@ export default {
     if (this.tester) {
       return this.tester
     }
-    // Model
-    const {TestPanelManager} = require('./test/test-panel-manager')
-    const testPanelManager = new TestPanelManager()
 
     const {Tester} = require('./test/tester')
-    this.tester = new Tester(this.provideGoConfig(), testPanelManager)
+    this.tester = new Tester(this.provideGoConfig(), this.loadOutput())
     if (this.subscriptions) {
       this.subscriptions.add(this.tester)
     }
 
-    // View
-    const TestPanel = require('./test/test-panel')
-    const view = this.consumeViewProvider({
-      view: TestPanel,
-      model: testPanelManager
-    })
-
     if (this.subscriptions) {
-      this.subscriptions.add(testPanelManager)
       this.subscriptions.add(this.tester)
-      this.subscriptions.add(view)
     }
 
     return this.tester
@@ -196,12 +262,24 @@ export default {
     return this.gorename
   },
 
-  getBuilder () {
+  loadGoModifyTags () {
+    if (this.gomodifytags) {
+      return this.gomodifytags
+    }
+    const GoModifyTags = require('./tags/gomodifytags')
+    this.gomodifytags = new GoModifyTags(this.provideGoConfig())
+    if (this.subscriptions) {
+      this.subscriptions.add(this.gomodifytags)
+    }
+    return this.gomodifytags
+  },
+
+  loadBuilder () {
     if (this.builder) {
       return this.builder
     }
     const {Builder} = require('./build/builder')
-    this.builder = new Builder(this.provideGoConfig())
+    this.builder = new Builder(this.provideGoConfig(), () => this.buildLinter, this.loadOutput())
 
     if (this.subscriptions) {
       this.subscriptions.add(this.builder)
@@ -210,12 +288,12 @@ export default {
     return this.builder
   },
 
-  getGometalinterLinter () {
+  loadGometalinter () {
     if (this.linter) {
       return this.linter
     }
     const {GometalinterLinter} = require('./lint/linter')
-    this.linter = new GometalinterLinter(this.provideGoConfig())
+    this.linter = new GometalinterLinter(this.provideGoConfig(), () => this.gometalinterLinter)
 
     if (this.subscriptions) {
       this.subscriptions.add(this.linter)
@@ -297,8 +375,11 @@ export default {
     return this.getPanelManager().registerViewProvider(provider.view, provider.model)
   },
 
-  provideLinter () {
-    return [this.getBuilder(), this.getGometalinterLinter()]
+  consumeLinter (registry) {
+    this.buildLinter = registry({name: 'go build'})
+    this.subscriptions.add(this.buildLinter)
+    this.gometalinterLinter = registry({name: 'gometalinter'})
+    this.subscriptions.add(this.gometalinterLinter)
   },
 
   provideGoConfig () {
@@ -315,7 +396,7 @@ export default {
       return this.getservice.provide()
     }
     const {GetService} = require('./get/service')
-    this.getservice = new GetService(this.provideGoConfig())
+    this.getservice = new GetService(this.provideGoConfig(), this.loadOutput())
     return this.getservice.provide()
   },
 

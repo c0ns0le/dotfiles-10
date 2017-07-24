@@ -11,6 +11,16 @@ Plugin 'tpope/vim-fugitive' " fun with git
 Plugin 'bling/vim-airline' " powerline
 Plugin 'ekalinin/Dockerfile.vim' " docker syntax
 Plugin 'nathanaelkane/vim-indent-guides' " indent guides
+Plugin 'scrooloose/syntastic' " syntax
+Plugin 'valloric/youcompleteme' " completion
+Plugin 'tpope/vim-rails' " rails
+Plugin 'tpope/vim-bundler' " bundler
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-endwise'
+Plugin 'raimondi/delimitmate'
+Plugin 'thaerkh/vim-workspace'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'sheerun/vim-polyglot'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -34,3 +44,15 @@ set directory=~/.vim/swap        " keep swp files under ~/.vim/swap
 set expandtab
 set shiftwidth=2
 set softtabstop=2
+
+" Enable NerdTree
+autocmd vimenter * NERDTree
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

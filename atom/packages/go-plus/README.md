@@ -1,5 +1,7 @@
 # [go-plus](https://atom.io/packages/go-plus) [![Build Status](https://travis-ci.org/joefitzgerald/go-plus.svg?branch=master)](https://travis-ci.org/joefitzgerald/go-plus) [![Build status](https://ci.appveyor.com/api/projects/status/d0cekvaprt9wo1et/branch/master?svg=true)](https://ci.appveyor.com/project/joefitzgerald/go-plus/branch/master) [![Slack](https://img.shields.io/badge/atom_slack-%23go--plus-blue.svg?style=flat)](https://atom-slack.herokuapp.com) [![Slack](https://img.shields.io/badge/gophers_slack-%23go--plus-blue.svg?style=flat)](https://gophersinvite.herokuapp.com)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/joefitzgerald/go-plus.svg)](https://greenkeeper.io/)
+
 > An Improved [Go](https://www.golang.org) Experience For The [Atom Editor](https://atom.io)
 
 * Github: https://github.com/joefitzgerald/go-plus
@@ -19,6 +21,8 @@ This package includes the following functionality:
   [`gogetdoc`](https://github.com/zmb3/gogetdoc)
 * Rename the symbol under your cursor using `gorename`
 * Go to definition using `guru` or `godef`
+* Highlight occurrences of an identifier using `guru`
+* Find usages of an identifier using `guru`
 
 You can add debug functionality to Atom by installing the following package:
 

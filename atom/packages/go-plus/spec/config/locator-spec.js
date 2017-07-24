@@ -136,9 +136,9 @@ describe('Locator', () => {
       }
     })
 
-    it('gopath() returns false', () => {
+    it('gopath() returns the default GOPATH', () => {
       expect(locator.gopath).toBeDefined()
-      expect(locator.gopath()).toBe(false)
+      expect(locator.gopath()).toBe(path.join(os.homedir(), 'go'))
     })
 
     describe('when there is atom config for go-plus.config.gopath', () => {
@@ -169,9 +169,9 @@ describe('Locator', () => {
       process.env.GOPATH = '        '
     })
 
-    it('gopath() returns false', () => {
+    it('gopath() returns the default GOPATH', () => {
       expect(locator.gopath).toBeDefined()
-      expect(locator.gopath()).toBe(false)
+      expect(locator.gopath()).toBe(path.join(os.homedir(), 'go'))
     })
 
     describe('when there is atom config for go-plus.config.gopath', () => {
@@ -420,16 +420,6 @@ describe('Locator', () => {
             expect(tool).toBe(toolPath)
           })
         }
-      })
-    })
-
-    it('stat() returns false for nonexistent files', () => {
-      let stat = null
-      let done = locator.stat('nonexistentthing').then((s) => { stat = s })
-      waitsForPromise(() => { return done })
-
-      runs(() => {
-        expect(stat).toBe(false)
       })
     })
 

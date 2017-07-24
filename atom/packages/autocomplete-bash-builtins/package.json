@@ -1,22 +1,61 @@
 {
-  "name": "autocomplete-bash-builtins",
-  "main": "./lib/main",
-  "version": "0.3.4",
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11728-52675-lnmh1j/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11728-52675-lnmh1j/package.tgz",
+        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11728-52675-lnmh1j/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-11728-52675-1vqzyl7"
+    ]
+  ],
+  "_from": "../d-11728-52675-lnmh1j/package.tgz",
+  "_id": "autocomplete-bash-builtins@0.3.5",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/autocomplete-bash-builtins",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11728-52675-lnmh1j/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11728-52675-lnmh1j/package.tgz",
+    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11728-52675-lnmh1j/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-11728-52675-lnmh1j/package.tgz",
+  "_shasum": "ca68376ce61f412765a4ce6fcccc062e7e1023fd",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-11728-52675-lnmh1j/package.tgz",
+  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-11728-52675-1vqzyl7",
+  "bugs": {
+    "url": "https://github.com/JASONews/autocomplete-bash-builtins/issues"
+  },
+  "dependencies": {},
   "description": "An autocomplete for common used bash builtin variables and functions",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/JASONews/autocomplete-bash-builtins#readme",
   "keywords": [
     "bash",
     "autocomplete",
     "shell",
     "sh"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JASONews/autocomplete-bash-builtins.git"
-  },
   "license": "MIT",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
-  },
+  "main": "./lib/main",
+  "name": "autocomplete-bash-builtins",
+  "optionalDependencies": {},
   "providedServices": {
     "autocomplete.provider": {
       "versions": {
@@ -24,31 +63,11 @@
       }
     }
   },
-  "dependencies": {},
   "readme": "# Autocomplete-bash-builtin package\n\nAn autocomplete for common used bash variables and functions.\nDocs are from https://www.gnu.org/software/bash/manual/bash.html.\n\n### Updates\n[x] Added autocomplete for Path\n",
   "readmeFilename": "README.md",
-  "bugs": {
-    "url": "https://github.com/JASONews/autocomplete-bash-builtins/issues"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JASONews/autocomplete-bash-builtins.git"
   },
-  "homepage": "https://github.com/JASONews/autocomplete-bash-builtins#readme",
-  "_id": "autocomplete-bash-builtins@0.3.4",
-  "_shasum": "18a4bc3fbc8802741b39b16ed9d372f6085eb75d",
-  "_resolved": "file:../d-116412-62709-175d4v7/package.tgz",
-  "_from": "../d-116412-62709-175d4v7/package.tgz",
-  "_atomModuleCache": {
-    "version": 1,
-    "dependencies": [],
-    "extensions": {
-      ".coffee": [
-        "lib/dirProvider.coffee",
-        "lib/main.coffee",
-        "lib/provider.coffee",
-        "lib/vars.coffee"
-      ],
-      ".json": [
-        "package.json"
-      ]
-    },
-    "folders": []
-  }
+  "version": "0.3.5"
 }

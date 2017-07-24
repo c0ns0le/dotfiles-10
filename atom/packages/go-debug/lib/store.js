@@ -1,7 +1,9 @@
 'use babel'
 
 import { createStore, combineReducers } from 'redux'
-const assign = (...items) => Object.assign.apply(Object, [{}].concat(items))
+import { indexOfBreakpoint, indexOfBreakpointByName } from './store-utils'
+
+const assign = (...items) => Object.assign({}, ...items)
 
 function updateArrayItem (array, index, o) {
   return array.slice(0, index).concat(
@@ -19,7 +21,7 @@ function stacktrace (state = [], action) {
     case 'UPDATE_STACKTRACE':
       // attempt to copy the variables over to the new stacktrace
       return action.stacktrace.map((stack) => {
-        const existingStack = state.find((st) => st.pc === stack.pc)
+        const existingStack = state.find((st) => st.id === stack.id)
         if (!stack.variables && existingStack) {
           stack.variables = existingStack.variables
         }
@@ -27,17 +29,16 @@ function stacktrace (state = [], action) {
       })
 
     case 'UPDATE_VARIABLES':
-      var variables = state[action.index].variables
+      var variables = state[action.stacktraceIndex].variables
       if (action.path) {
-        // update the variable at 'path' to loaded
+        // update the variable at "path" to loaded
         variables = assign(variables, {
           [action.path]: assign(variables[action.path], { loaded: true })
         })
       }
 
-      // TODO: update each variable in action.variables on its own? probably...
       variables = assign(variables, action.variables)
-      return updateArrayItem(state, action.index, { variables: variables })
+      return updateArrayItem(state, action.stacktraceIndex, { variables: variables })
   }
   return state
 }
@@ -52,36 +53,48 @@ function goroutines (state = [], action) {
   }
   return state
 }
+let bpNamePostfix = 0
+let breakpointSorter = (a, b) => {
+  const s = a.file.localeCompare(b.file)
+  return s !== 0 ? s : (a.line - b.line)
+}
 function breakpoints (state = [], action) {
-  const { bp } = action
-  const { file, line } = bp || {}
-  const index = indexOfBreakpoint(state, file, line)
+  let { bp } = action
+  const { name, file, line } = bp || {}
+  const index = name ? indexOfBreakpointByName(state, name) : indexOfBreakpoint(state, file, line)
   switch (action.type) {
     case 'ADD_BREAKPOINT':
       if (index === -1) {
-        return state.concat(bp).sort((a, b) => {
-          const s = a.file.localeCompare(b.file)
-          return s !== 0 ? s : (a.line - b.line)
-        })
+        bp.name = 'bp' + bpNamePostfix++
+        return state.concat(bp).sort(breakpointSorter)
       }
-      return updateArrayItem(state, index, bp)
+      return state
 
     case 'REMOVE_BREAKPOINT':
-      if (bp.state !== 'busy') {
-        return index === -1 ? state : state.slice(0, index).concat(state.slice(index + 1))
-      }
-      return updateArrayItem(state, index, bp)
+      return index === -1 ? state : state.slice(0, index).concat(state.slice(index + 1))
 
-    case 'UPDATE_BREAKPOINT_LINE':
+    case 'EDIT_BREAKPOINT':
       if (index !== -1) {
-        return updateArrayItem(state, index, { line: action.newLine })
+        if (bp.state !== 'error') {
+          bp = assign(bp, { message: null })
+        }
+        return updateArrayItem(state, index, bp)
       }
       return state
 
     case 'STOP':
-      return state.map(({ file, line }) => {
-        return { file, line, state: 'notStarted' }
+      return state.map((bp) => {
+        const changes = { state: 'notStarted' }
+        if (bp.state === 'error') {
+          changes.message = null
+        }
+        return assign(bp, changes)
       })
+
+    case 'INIT_STORE':
+      return state.map((bp) => {
+        return assign(bp, { name: 'bp' + bpNamePostfix++, state: 'notStarted' })
+      }).sort(breakpointSorter)
   }
 
   return state
@@ -95,9 +108,6 @@ function state (state = 'notStarted', action) {
       return 'started'
 
     case 'SET_STATE':
-      return action.state
-
-    case 'SET_SELECTED_GOROUTINE':
       return action.state
   }
   return state
@@ -127,25 +137,6 @@ function selectedGoroutine (state = 0, action) {
   }
   return state
 }
-function args (state = '', action) {
-  if (action.type === 'UPDATE_ARGS') {
-    return action.args
-  }
-  return state
-}
-function path (state = '', action) {
-  if (action.type === 'SET_DLV_PATH') {
-    return action.path
-  }
-  return state
-}
-
-function fileOverride (state = '', action) {
-  if (action.type === 'UPDATE_FILE_OVERRIDE') {
-    return action.fileOverride
-  }
-  return state
-}
 
 const delve = combineReducers({
   stacktrace,
@@ -153,117 +144,36 @@ const delve = combineReducers({
   breakpoints,
   state,
   selectedStacktrace,
-  selectedGoroutine,
-  args,
-  fileOverride,
-  path
+  selectedGoroutine
 })
 
-function editors (state = {}, action) {
-  void action
-  return state
-}
-const getDefaultPanel = () => {
-  return { visible: atom.config.get('go-debug.panelInitialVisible') }
-}
-function panel (state, action) {
-  if (!state) {
-    state = getDefaultPanel()
-  }
+function selectedConfig (state = '', action) {
   switch (action.type) {
-    case 'TOGGLE_PANEL':
-      return assign(state, { visible: 'visible' in action ? action.visible : !state.visible })
-
-    case 'SET_PANEL_WIDTH':
-      return assign(state, { width: action.width })
+    case 'SET_SELECTED_CONFIG':
+      return action.configName || ''
   }
   return state
 }
-const defaultOutput = {
-  messages: [],
-  visible: false,
-  filters: { delve: true, output: true }
-}
-function output (state = defaultOutput, action) {
-  switch (action.type) {
-    case 'TOGGLE_OUTPUT':
-      return assign(state, { visible: 'visible' in action ? action.visible : !state.visible })
-
-    case 'CLEAN_OUTPUT':
-      return assign(state, { messages: [] })
-
-    case 'ADD_OUTPUT_MESSAGE': {
-      const messages = state.messages.concat({ message: action.message, type: action.messageType })
-      return assign(state, { messages: messages })
-    }
-
-    case 'TOGGLE_OUTPUT_FILTER':
-      return assign(state, {
-        filters: assign(state.filters, {
-          [action.filter]: !state.filters[action.filter]
-        })
-      })
-  }
-  return state
-}
-function variables (state = { expanded: {} }, action) {
-  switch (action.type) {
-    case 'TOGGLE_VARIABLE':
-      var expanded = assign(state.expanded, {
-        [action.path]: 'expanded' in action ? action.expanded : !state.expanded[action.path]
-      })
-      return assign(state, { expanded })
+function configurations (state = [], action) {
+  if (action.type === 'SET_CONFIGURATION') {
+    return action.configurations
   }
   return state
 }
 
-export let store
-
-export function init (state) {
-  if (state.breakpoints) {
-    state.delve = { breakpoints: state.breakpoints }
-    delete state.breakpoints
+export default function (state) {
+  if (state && state.panel) {
+    delete state.panel
   }
-  if (state.panel) {
-    // ignore the visible state from the previous session
-    // and just take the value from the setting
-    delete state.panel.visible
-  }
-  state.panel = assign(getDefaultPanel(), state.panel)
 
-  store = createStore(combineReducers({
-    editors,
-    panel,
+  const store = createStore(combineReducers({
     delve,
-    output,
-    variables
+    selectedConfig,
+    configurations
   }), state)
-}
-export function dispose () {
-  store = null
-}
 
-export function serialize () {
-  const state = store.getState()
-  return {
-    panel: { width: state.panel.width },
-    delve: {
-      breakpoints: state.delve.breakpoints.map(({ file, line }) => { return { file, line } }),
-      args: state.delve.args,
-      fileOverride: state.delve.fileOverride
-    }
-  }
-}
+  // init the store (upgrades the previous state so it is usable again)
+  store.dispatch({ type: 'INIT_STORE' })
 
-export function indexOfBreakpoint (bps, file, line) {
-  return bps.findIndex((bp) => bp.file === file && bp.line === line)
-}
-export function getBreakpoint (file, line) {
-  const bps = store.getState().delve.breakpoints
-  const index = indexOfBreakpoint(bps, file, line)
-  return index === -1 ? null : bps[index]
-}
-export function getBreakpoints (file) {
-  const bps = store.getState().delve.breakpoints
-  return !file ? bps : bps.filter((bp) => bp.file === file)
+  return store
 }
