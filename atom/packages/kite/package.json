@@ -2,39 +2,39 @@
   "_args": [
     [
       {
-        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117628-20110-1pns3uq.gfk0ozuxr/package.tgz",
+        "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117631-7469-1jrnzoq.4fngkfbt9/package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117628-20110-1pns3uq.gfk0ozuxr/package.tgz",
-        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117628-20110-1pns3uq.gfk0ozuxr/package.tgz",
+        "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117631-7469-1jrnzoq.4fngkfbt9/package.tgz",
+        "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117631-7469-1jrnzoq.4fngkfbt9/package.tgz",
         "type": "local"
       },
-      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117628-20110-1tnuvef.js8lwel8fr"
+      "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117631-7469-1t7t8qu.5boml8r529"
     ]
   ],
-  "_from": "../d-117628-20110-1pns3uq.gfk0ozuxr/package.tgz",
+  "_from": "../d-117631-7469-1jrnzoq.4fngkfbt9/package.tgz",
   "_id": "kite@0.32.1",
   "_inCache": true,
   "_location": "/kite",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117628-20110-1pns3uq.gfk0ozuxr/package.tgz",
+    "raw": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117631-7469-1jrnzoq.4fngkfbt9/package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117628-20110-1pns3uq.gfk0ozuxr/package.tgz",
-    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117628-20110-1pns3uq.gfk0ozuxr/package.tgz",
+    "rawSpec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117631-7469-1jrnzoq.4fngkfbt9/package.tgz",
+    "spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117631-7469-1jrnzoq.4fngkfbt9/package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:../d-117628-20110-1pns3uq.gfk0ozuxr/package.tgz",
+  "_resolved": "file:../d-117631-7469-1jrnzoq.4fngkfbt9/package.tgz",
   "_shasum": "802d96ccdec03175c5a88f99b8b8d30f5379265c",
   "_shrinkwrap": null,
-  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117628-20110-1pns3uq.gfk0ozuxr/package.tgz",
-  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117628-20110-1tnuvef.js8lwel8fr",
+  "_spec": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/d-117631-7469-1jrnzoq.4fngkfbt9/package.tgz",
+  "_where": "/private/var/folders/sp/c7xqjjln699062j1jj0rgm5c0000gn/T/apm-install-dir-117631-7469-1t7t8qu.5boml8r529",
   "bugs": {
     "url": "https://github.com/kiteco/atom-plugin/issues"
   },

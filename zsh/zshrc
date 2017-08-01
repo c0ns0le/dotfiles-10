@@ -1,44 +1,43 @@
-# Antibody
-source <(antibody init)
+source ~/.zplug/init.zsh
 
 # Prompt
-antibody bundle nojhan/liquidprompt
+zplug nojhan/liquidprompt
 
-## Lib files
-#antibody bundle robbyrussell/oh-my-zsh lib/
+# Zplug manage Zplug
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 ## Basic Bundles
-antibody bundle djui/alias-tips
-antibody bundle zsh-users/zsh-syntax-highlighting
-antibody bundle paraqles/zsh-plugin-git
-#antibody bundle common-aliases
-#antibody bundle github
-antibody bundle caarlos0/zsh-open-pr
-#antibody bundle adb
-antibody bundle rupa/z
-antibody bundle supercrabtree/k
-antibody bundle s7anley/zsh-geeknote
-antibody bundle zsh-users/zsh-autosuggestions
-#antibody bundle history
-#antibody bundle vi-mode
-antibody bundle chrissicool/zsh-256color
-antibody bundle horosgrisa/autoenv
-antibody bundle https://github.com/zsh-users/zsh-history-substring-search
-antibody bundle zsh-users/zsh-completions
-#antibody bundle tmux
-#antibody bundle tmuxinator
+zplug djui/alias-tips
+zplug zsh-users/zsh-syntax-highlighting
+zplug paraqles/zsh-plugin-git
+zplug "plugins/common-aliases", from:oh-my-zsh
+zplug "plugins/github", from:oh-my-zsh
+zplug caarlos0/zsh-open-pr
+zplug "plugins/adb", from:oh-my-zsh
+zplug "plugins/z", from:oh-my-zsh
+zplug supercrabtree/k
+zplug s7anley/zsh-geeknote
+zplug zsh-users/zsh-autosuggestions
+zplug "plugins/history", from:oh-my-zsh
+zplug "plugins/vi-mode", from:oh-my-zsh
+zplug chrissicool/zsh-256color
+zplug horosgrisa/autoenv
+zplug zsh-users/zsh-history-substring-search
+zplug zsh-users/zsh-completions
+zplug "plugins/tmux", from:oh-my-zsh
+zplug "plugins/tmuxinator", from:oh-my-zsh
 
 ## Ruby Bundles
-antibody bundle paraqles/zsh-plugin-ruby
-#antibody bundle rbenv
+zplug paraqles/zsh-plugin-ruby
+zplug "plugins/rbenv", from:oh-my-zsh
 
-antibody bundle pelletiermaxime/test-kitchen-zsh-plugin
+zplug pelletiermaxime/test-kitchen-zsh-plugin
 
 ## OS specific plugins
 if [[ $CURRENT_OS == 'OS X' ]]; then
-    antibody bundle paraqles/zsh-plugin-mac
-    #antibody bundle brew
-    #antibody bundle brew-cask
+    zplug paraqles/zsh-plugin-mac
+    zplug "plugins/brew", from:oh-my-zsh
+    zplug "plugins/brew-cask", from:oh-my-zsh
 elif [[ $CURRENT_OS == 'Linux' ]]; then
     # None so far...
 
@@ -47,8 +46,16 @@ elif [[ $CURRENT_OS == 'Linux' ]]; then
     fi
 fi
 
-## Antigen apply
-#antibody apply
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
 
 # Basic settings
 export PATH="/usr/local/sbin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin:$ADB_HOME:$PATH"

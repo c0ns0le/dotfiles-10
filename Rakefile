@@ -56,6 +56,11 @@ namespace :install do
     system('git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim')
     system('vim +PluginInstall +qall')
   end
+
+  desc 'Install zplug'
+  task :zplug do
+    system('curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh')
+  end
 end
 
 namespace :config do
