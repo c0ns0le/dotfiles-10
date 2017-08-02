@@ -1,7 +1,10 @@
 source ~/.zplug/init.zsh
 
+# Auto-update
+zplug update
+
 # Prompt
-zplug nojhan/liquidprompt
+zplug mgee/slimline
 
 # Zplug manage Zplug
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
