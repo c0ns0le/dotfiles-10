@@ -30,6 +30,7 @@ zplug zsh-users/zsh-completions
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/tmuxinator", from:oh-my-zsh
 zplug "plugins/kubectl", from:oh-my-zsh
+zplug zchee/go-zsh-completions
 
 ## Ruby Bundles
 zplug paraqles/zsh-plugin-ruby
@@ -62,12 +63,12 @@ fi
 zplug load --verbose
 
 # Basic settings
-export PATH="/usr/local/sbin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin:$ADB_HOME:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:/bin:/usr/sbin:/sbin:/usr/bin:$PATH"
 export EDITOR='vim'
 export JAVA_HOME='/usr'
 
 # Aliases
-alias apk_install="$ADB_HOME/adb install -r $@"
+alias apk_install="adb install -r $@"
 
 # Shortcuts
 export DOWNLOAD_HOME="$HOME/Downloads"
