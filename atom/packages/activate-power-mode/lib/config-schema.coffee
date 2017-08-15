@@ -4,9 +4,11 @@ module.exports =
     description: "Toggle on start."
     type: "boolean"
     default: true
+    order: 1
 
   comboMode:
     type: "object"
+    order: 2
     properties:
       enabled:
         title: "Combo Mode - Enabled"
@@ -15,13 +17,22 @@ module.exports =
         default: true
         order: 1
 
+      multiplier:
+        title: "Combo Mode - Multiplier"
+        description: "Turn the multiplier on/off. (multiplier = streak * current level)."
+        type: "boolean"
+        default: true
+        order: 2
+
       activationThreshold:
         title: "Combo Mode - Activation Threshold"
-        description: "Streak threshold to activate the power mode."
-        type: "integer"
-        default: 50
-        minimum: 1
-        maximum: 1000
+        description: "Streak threshold to activate the power mode and levels."
+        type: "array"
+        default: ['20', '50', '100', '200', '500']
+        # items:
+        #   type: "integer"
+        #   minimum: 1
+        #   maximum: 1000
 
       streakTimeout:
         title: "Combo Mode - Streak Timeout"
@@ -53,71 +64,9 @@ module.exports =
         minimum: 0
         maximum: 1
 
-  screenShake:
-    type: "object"
-    properties:
-      minIntensity:
-        title: "Screen Shake - Minimum Intensity"
-        description: "The minimum (randomized) intensity of the shake."
-        type: "integer"
-        default: 1
-        minimum: 0
-        maximum: 100
-
-      maxIntensity:
-        title: "Screen Shake - Maximum Intensity"
-        description: "The maximum (randomized) intensity of the shake."
-        type: "integer"
-        default: 3
-        minimum: 0
-        maximum: 100
-
-      enabled:
-        title: "Screen Shake - Enabled"
-        description: "Turn the shaking on/off."
-        type: "boolean"
-        default: true
-
-  playAudio:
-    type: "object"
-    properties:
-      enabled:
-        title: "Play Audio - Enabled"
-        description: "Play audio clip on/off."
-        type: "boolean"
-        default: false
-        order: 1
-
-      audioclip:
-        title: "Play Audio - Audioclip"
-        description: "Which audio clip played at keystroke."
-        type: "string"
-        default: '../audioclips/gun.wav'
-        enum: [
-          {value: '../audioclips/gun.wav', description: 'Gun'}
-          {value: '../audioclips/typewriter.wav', description: 'Type Writer'}
-          {value: 'customAudioclip', description: 'Custom Path'}
-        ]
-        order: 3
-
-      customAudioclip:
-        title: "Play Audio - Path to Audioclip"
-        description: "Path to audioclip played at keystroke."
-        type: "string"
-        default: 'rocksmash.wav'
-        order: 4
-
-      volume:
-        title: "Play Audio - Volume"
-        description: "Volume of the audio clip played at keystroke."
-        type: "number"
-        default: 0.42
-        minimum: 0.0
-        maximum: 1.0
-        order: 2
-
   particles:
     type: "object"
+    order: 3
     properties:
       enabled:
         title: "Particles - Enabled"
@@ -189,7 +138,80 @@ module.exports =
             default: 4
             minimum: 0
 
+      effect:
+        title: "Effect"
+        description: "Defines the effect."
+        type: "string"
+        default: ""
+        order: 7
+
+  screenShake:
+    type: "object"
+    order: 4
+    properties:
+      enabled:
+        title: "Screen Shake - Enabled"
+        description: "Turn the shaking on/off."
+        type: "boolean"
+        default: true
+
+      minIntensity:
+        title: "Screen Shake - Minimum Intensity"
+        description: "The minimum (randomized) intensity of the shake."
+        type: "integer"
+        default: 1
+        minimum: 0
+        maximum: 100
+
+      maxIntensity:
+        title: "Screen Shake - Maximum Intensity"
+        description: "The maximum (randomized) intensity of the shake."
+        type: "integer"
+        default: 3
+        minimum: 0
+        maximum: 100
+
+  playAudio:
+    type: "object"
+    order: 5
+    properties:
+      enabled:
+        title: "Play Audio - Enabled"
+        description: "Play audio clip on/off."
+        type: "boolean"
+        default: false
+        order: 1
+
+      audioclip:
+        title: "Play Audio - Audioclip"
+        description: "Which audio clip played at keystroke."
+        type: "string"
+        default: '../audioclips/gun.wav'
+        enum: [
+          {value: '../audioclips/gun.wav', description: 'Gun'}
+          {value: '../audioclips/typewriter.wav', description: 'Type Writer'}
+          {value: 'customAudioclip', description: 'Custom Path'}
+        ]
+        order: 3
+
+      customAudioclip:
+        title: "Play Audio - Path to Audioclip"
+        description: "Path to audioclip played at keystroke."
+        type: "string"
+        default: 'rocksmash.wav'
+        order: 4
+
+      volume:
+        title: "Play Audio - Volume"
+        description: "Volume of the audio clip played at keystroke."
+        type: "number"
+        default: 0.42
+        minimum: 0.0
+        maximum: 1.0
+        order: 2
+
   excludedFileTypes:
+    order: 6
     type: "object"
     properties:
       excluded:
@@ -197,3 +219,15 @@ module.exports =
         description: "Use comma separated, lowercase values (i.e. \"html, cpp, css\")"
         type: "array"
         default: ["."]
+
+  flow:
+    title: "Flow"
+    description: "Defines the flow when typping."
+    type: "string"
+    default: ""
+    order: 7
+
+  plugins:
+    type: "object"
+    order: 8
+    properties: {}

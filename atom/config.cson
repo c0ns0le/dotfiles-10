@@ -32,7 +32,8 @@
   "linter-erb":
     erbExecutablePath: "/usr/local/opt/rbenv/shims/erb"
     trimMode: "-"
-  "linter-ui-default": {}
+  "linter-ui-default":
+    panelHeight: 81
   metrics:
     userId: "44edc941840c87dd1cf98a0d605a1fa48c3e1883"
   "python-autopep8": {}

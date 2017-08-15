@@ -29,6 +29,7 @@ zplug zsh-users/zsh-history-substring-search
 zplug zsh-users/zsh-completions
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/tmuxinator", from:oh-my-zsh
+zplug "plugins/kubectl", from:oh-my-zsh
 
 ## Ruby Bundles
 zplug paraqles/zsh-plugin-ruby
