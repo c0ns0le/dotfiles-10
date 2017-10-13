@@ -1,24 +1,55 @@
+# Brew Stuff
 tap 'caskroom/cask'
 tap 'homebrew/brewdler'
 tap 'homebrew/dupes'
 tap 'homebrew/versions'
-brew 'android-platform-tools'
-brew 'brew-cask'
-brew 'csshx'
+cask 'android-platform-tools'
+
+# Dev Libraries
 brew 'gcc46'
 brew 'glib'
-brew 'hub'
-brew 'lastpass-cli', args: ['with-pinentry']
+
+# Ruby Tools
 brew 'rbenv'
 brew 'rbenv-bundler'
-brew 'reattach-to-user-namespace'
 brew 'ruby-build'
-brew 'tmux'
-brew 'watch'
-brew 'wget'
+brew 'imagemagick'
+
+# ZSH Tools
 brew 'zsh'
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
+
+# Docker Tools
+brew 'docker'
+brew 'docker-compose', args: ['without-docker-machine']
+
+# Kubernetes Tools
+cask 'minikube'
+brew 'docker-machine-driver-xhyve', args: ['without-docker-machine']
+brew 'kops'
+brew 'kubernetes-cli'
+
+# CLI Tools
+brew 'csshx'
+brew 'hub'
+brew 'lastpass-cli', args: ['with-pinentry']
+brew 'reattach-to-user-namespace'
 brew 'thefuck'
-brew 'irssi'
-brew 'imagemagick'
+brew 'tmux'
+brew 'watch'
+brew 'wget'
+
+# AWS Tools
+brew 'awscli'
+brew 'aws-shell'
+
+# Go Tools
+brew 'go'
+brew 'godep'
+
+# Vim
+brew 'vim'
+
+# GUI Tools
+cask 'slack'
