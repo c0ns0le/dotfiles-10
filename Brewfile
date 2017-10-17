@@ -39,6 +39,8 @@ brew 'thefuck'
 brew 'tmux'
 brew 'watch'
 brew 'wget'
+brew 'gpg'
+cask 'keybase'
 
 # AWS Tools
 brew 'awscli'
